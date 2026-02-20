@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #6AABBF;
+  --bg-primary: #000000;
+  --bg-secondary: #0A0A0A;
+  --bg-card: #0D0D0D;
+  --border-primary: #1A1A1A;
+  --border-secondary: #222222;
+  --border-tertiary: #333333;
+  --text-primary: #FFFFFF;
+  --text-secondary: #AAAAAA;
+  --text-muted: #888888;
+  --text-dim: #666666;
+  --text-dark: #555555;
+  --text-darker: #444444;
+  --text-subtle: #333333;
+  --accent-glow: #00BFFF80;
+  --accent-faint: #6AABBF12;
+  --accent-tag: #00BFFF90;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html, body {
+    height: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .font-playfair {
+    font-family: "Playfair Display", serif;
+  }
+
+  .font-inter {
+    font-family: "Inter", sans-serif;
+  }
+
+  .font-mono {
+    font-family: "Roboto Mono", monospace;
+  }
+
+  .font-montserrat {
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .font-poppins {
+    font-family: "Poppins", sans-serif;
+  }
+
+  /* Lucide icon font */
+  .icon-lucide {
+    font-family: "lucide";
+    font-feature-settings: "liga" 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
 }
