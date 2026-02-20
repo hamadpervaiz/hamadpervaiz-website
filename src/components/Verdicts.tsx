@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const flagshipCard = {
   tag: "VIDEO INTERVIEW · FEATURED",
@@ -71,6 +72,8 @@ function MediaPlaceholder({
 }
 
 export default function Verdicts() {
+  const [playing, setPlaying] = useState(false);
+
   return (
     <section className="w-full bg-[var(--bg-primary)] px-5 sm:px-8 md:px-12 lg:px-6 py-16 sm:py-20 lg:py-[160px]">
       <div className="max-w-[1200px] mx-auto flex flex-col gap-12 sm:gap-16">
@@ -114,11 +117,42 @@ export default function Verdicts() {
               viewport={{ once: true }}
               className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
             >
-              <MediaPlaceholder
-                label={flagshipCard.mediaLabel}
-                icon={flagshipCard.mediaIcon}
-                className="flex-1"
-              />
+              {playing ? (
+                <div className="relative w-full aspect-video bg-black">
+                  <iframe
+                    src="https://www.youtube.com/embed/hGSXbTNFXcE?autoplay=1&rel=0"
+                    title="The Death of the Digital Middleman — PTV Interview"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
+              ) : (
+                <button
+                  onClick={() => setPlaying(true)}
+                  className="relative w-full aspect-video bg-black cursor-pointer group/play"
+                >
+                  <img
+                    src="https://img.youtube.com/vi/hGSXbTNFXcE/maxresdefault.jpg"
+                    alt="The Death of the Digital Middleman — PTV Interview"
+                    className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover/play:opacity-90 transition-opacity"
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-white/80 flex items-center justify-center group-hover/play:border-[var(--accent)] group-hover/play:scale-110 transition-all">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="white"
+                        className="w-6 h-6 sm:w-8 sm:h-8 ml-1"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                    <span className="font-mono text-[9px] sm:text-[10px] tracking-[2px] sm:tracking-[3px] text-white/70">
+                      {flagshipCard.mediaLabel}
+                    </span>
+                  </div>
+                </button>
+              )}
               <div className="flex flex-col gap-3 sm:gap-4 p-5 sm:p-6 lg:p-8">
                 <span className="font-mono text-[9px] font-medium tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
                   {flagshipCard.tag}
