@@ -2,19 +2,62 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 const images = [
-  "https://images.unsplash.com/photo-1689150571822-1b573b695391?w=600&q=80",
-  "https://images.unsplash.com/photo-1621073831231-faa453d28112?w=600&q=80",
-  "https://images.unsplash.com/photo-1742119857260-b764e7c6e56d?w=600&q=80",
-  "https://images.unsplash.com/photo-1761390184499-bb8b96fce928?w=600&q=80",
-  "/images/insta-5.png",
+  "/images/hamad-image-1.jpeg",
+  "/images/hamad-image-2.jpeg",
+  "/images/hamad-image-3.jpeg",
+  "/images/hamad-image-4.jpeg",
+  "/images/hamad-image-5.jpeg",
 ];
 
 export default function Instagram() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Total slides: original + duplicates for seamless loop
+  const extendedImages = [...images, ...images, ...images];
+  const total = images.length;
+
+  const slideNext = useCallback(() => {
+    setIndex((prev) => prev + 1);
+  }, []);
+
+  // Auto-advance every 3 seconds
+  useEffect(() => {
+    timerRef.current = setInterval(slideNext, 3000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [slideNext]);
+
+  // When we reach the end of the second set, silently reset to the first set
+  useEffect(() => {
+    if (index >= total * 2) {
+      const timeout = setTimeout(() => {
+        if (trackRef.current) {
+          trackRef.current.style.transition = "none";
+          setIndex(index - total);
+          // Force reflow then re-enable transition
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (trackRef.current) {
+                trackRef.current.style.transition =
+                  "transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)";
+              }
+            });
+          });
+        }
+      }, 600);
+      return () => clearTimeout(timeout);
+    }
+  }, [index, total]);
+
   return (
-    <section className="w-full bg-[var(--bg-primary)] px-5 sm:px-8 md:px-12 lg:px-6 py-16 sm:py-20 lg:py-[120px]">
-      <div className="max-w-[1200px] mx-auto flex flex-col items-center gap-8 sm:gap-12">
+    <section className="w-full bg-[var(--bg-primary)] py-16 sm:py-20 lg:py-[120px]">
+      <div className="max-w-[1200px] mx-auto flex flex-col items-center gap-8 sm:gap-12 px-5 sm:px-8 md:px-12 lg:px-6">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -39,30 +82,40 @@ export default function Instagram() {
         >
           @hamadpervaiz
         </motion.a>
+      </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 w-full"
+      {/* Slider */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+        className="w-full overflow-hidden mt-8 sm:mt-12"
+      >
+        <div
+          ref={trackRef}
+          className="flex gap-3 sm:gap-4"
+          style={{
+            transition: "transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1)",
+            transform: `translateX(calc(-${index} * (min(320px, 70vw) + 12px)))`,
+          }}
         >
-          {images.map((src, i) => (
+          {extendedImages.map((src, i) => (
             <div
               key={i}
-              className={`relative aspect-square rounded overflow-hidden group cursor-pointer ${i === 4 ? "max-sm:col-span-2" : ""}`}
+              className="relative flex-shrink-0 w-[min(320px,70vw)] sm:w-[280px] lg:w-[320px] aspect-square rounded overflow-hidden group cursor-pointer"
             >
               <Image
                 src={src}
-                alt={`Instagram post ${i + 1}`}
+                alt={`Instagram post ${(i % total) + 1}`}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
             </div>
           ))}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

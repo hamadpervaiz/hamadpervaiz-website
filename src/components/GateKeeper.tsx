@@ -79,8 +79,65 @@ export default function GateKeeper() {
   const router = useRouter();
   const [consented, setConsented] = useState(false);
   const [intent, setIntent] = useState<Intent>("venture");
+  const [field1, setField1] = useState("");
+  const [field2, setField2] = useState("");
+  const [field3, setField3] = useState("");
+  const [field4, setField4] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   const config = formConfigs[intent];
+
+  const resetForm = () => {
+    setField1("");
+    setField2("");
+    setField3("");
+    setField4("");
+  };
+
+  const handleIntentChange = (key: Intent) => {
+    setIntent(key);
+    resetForm();
+    setError("");
+    setSubmitted(false);
+  };
+
+  const handleSubmit = async () => {
+    setError("");
+
+    if (!field1.trim() || !field2.trim() || !field3.trim()) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          intent,
+          field1: field1.trim(),
+          field2: field2.trim(),
+          field3: field3.trim(),
+          field4: field4.trim() || undefined,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      setSubmitted(true);
+      resetForm();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to send request.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <main className="relative min-h-screen bg-black overflow-x-hidden">
@@ -136,7 +193,7 @@ export default function GateKeeper() {
               return (
                 <button
                   key={card.key}
-                  onClick={() => setIntent(card.key)}
+                  onClick={() => handleIntentChange(card.key)}
                   className={`flex-1 flex flex-col gap-4 rounded-sm p-6 sm:py-8 sm:px-6 text-left transition-all duration-300 border ${
                     active
                       ? "bg-[#080808] border-[var(--accent)]"
@@ -206,6 +263,8 @@ export default function GateKeeper() {
                   </label>
                   <input
                     type="text"
+                    value={field1}
+                    onChange={(e) => setField1(e.target.value)}
                     className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors"
                     placeholder={config.field1}
                   />
@@ -216,6 +275,8 @@ export default function GateKeeper() {
                   </label>
                   <input
                     type="text"
+                    value={field2}
+                    onChange={(e) => setField2(e.target.value)}
                     className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors"
                     placeholder={config.field2}
                   />
@@ -231,6 +292,8 @@ export default function GateKeeper() {
                 </label>
                 <textarea
                   rows={3}
+                  value={field3}
+                  onChange={(e) => setField3(e.target.value)}
                   className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors resize-none leading-[1.7]"
                   placeholder={config.field3Placeholder}
                 />
@@ -252,6 +315,8 @@ export default function GateKeeper() {
                 </div>
                 <input
                   type="text"
+                  value={field4}
+                  onChange={(e) => setField4(e.target.value)}
                   className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors"
                   placeholder={config.field4Placeholder}
                 />
@@ -259,14 +324,47 @@ export default function GateKeeper() {
 
               <div className="h-8 sm:h-11" />
 
+              {/* Error Message */}
+              {error && (
+                <div className="mb-4 px-4 py-3 rounded-md border border-red-500/30 bg-red-500/5">
+                  <p className="font-poppins text-[13px] text-red-400">{error}</p>
+                </div>
+              )}
+
+              {/* Success Message */}
+              {submitted && (
+                <div className="mb-4 px-4 py-3 rounded-md border border-[var(--accent)]/30 bg-[var(--accent)]/5">
+                  <p className="font-poppins text-[13px] text-[var(--accent)]">
+                    Request submitted. You will be contacted within 48 hours.
+                  </p>
+                </div>
+              )}
+
               {/* Submit Button */}
-              <button className="w-full flex items-center justify-center gap-3 bg-white rounded-full py-[18px] hover:bg-white/90 transition-colors">
-                <span className="font-poppins text-[12px] font-semibold tracking-[2.5px] text-black">
-                  SUBMIT REQUEST
+              <button
+                onClick={handleSubmit}
+                disabled={submitting || submitted}
+                className={`w-full flex items-center justify-center gap-3 rounded-full py-[18px] transition-colors ${
+                  submitted
+                    ? "bg-[var(--accent)]/20 cursor-default"
+                    : submitting
+                      ? "bg-white/60 cursor-wait"
+                      : "bg-white hover:bg-white/90"
+                }`}
+              >
+                <span className={`font-poppins text-[12px] font-semibold tracking-[2.5px] ${submitted ? "text-[var(--accent)]" : "text-black"}`}>
+                  {submitted ? "REQUEST SENT" : submitting ? "SENDING..." : "SUBMIT REQUEST"}
                 </span>
-                <i className="icon-lucide text-[16px] text-black">
-                  arrow-right
-                </i>
+                {!submitting && !submitted && (
+                  <i className="icon-lucide text-[16px] text-black">
+                    arrow-right
+                  </i>
+                )}
+                {submitted && (
+                  <i className="icon-lucide text-[16px] text-[var(--accent)]">
+                    check
+                  </i>
+                )}
               </button>
             </motion.div>
           </AnimatePresence>
