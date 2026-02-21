@@ -11,7 +11,7 @@ export default function SignalVsNoise() {
     >
       <div className="absolute inset-0">
         <Image
-          src="/images/signal-bg.png"
+          src="/images/signal-vs-noise-bg.png"
           alt="Signal background"
           fill
           className="object-cover opacity-70"
