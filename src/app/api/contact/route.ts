@@ -1,7 +1,9 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export async function POST(request: Request) {
   try {
@@ -64,7 +66,7 @@ export async function POST(request: Request) {
       .filter(Boolean)
       .join("\n");
 
-    const { error } = await resend.emails.send({
+    const { error } = await getResend().emails.send({
       from: "The Gate <gate@hamadpervaiz.com>",
       to: "hello@hamadpervaiz.com",
       subject: `New ${intentLabel} Request — ${field1}`,

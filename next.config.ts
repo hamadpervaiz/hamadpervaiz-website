@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "oduscloud-cms.s3.ap-southeast-2.amazonaws.com",
+      },
     ],
   },
 };

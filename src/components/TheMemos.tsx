@@ -2,9 +2,31 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { memos } from "@/data/memos";
+import { memos as localMemos } from "@/data/memos";
 
-export default function TheMemos() {
+interface CMSMemo {
+  id: string;
+  title: string;
+  slug: string;
+  tag: string | null;
+  meta: Record<string, string>;
+  publishedAt: string | null;
+}
+
+interface TheMemosProps {
+  cmsMemos?: CMSMemo[] | null;
+}
+
+export default function TheMemos({ cmsMemos }: TheMemosProps) {
+  const memos = cmsMemos
+    ? cmsMemos.map((m) => ({
+        slug: m.slug,
+        date: m.publishedAt ? new Date(m.publishedAt).toISOString().slice(0, 7).replace("-", ".") : "",
+        title: m.title,
+        tag: m.tag || "",
+        time: m.meta?.readTime || "",
+      }))
+    : localMemos;
   return (
     <section
       id="memos"
