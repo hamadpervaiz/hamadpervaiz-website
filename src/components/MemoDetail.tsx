@@ -168,10 +168,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   viewport={{ once: true }}
                 >
                   <div className="h-6 sm:h-10" />
-                  <div className="bg-[#050505] border border-white/15 p-6 sm:p-8 flex flex-col gap-4 sm:gap-5">
-                    <span className="font-mono text-[9px] sm:text-[10px] font-medium tracking-[2px] text-[var(--accent)]">
-                      &gt;_ ARCHITECT&apos;S NOTE:
-                    </span>
+                  <div className="bg-[#050505] border border-white/15 p-6 sm:p-8">
                     <p className="font-inter text-[14px] sm:text-[15px] lg:text-[16px] font-light leading-[1.7] text-[#D1D5DB]">
                       {section.content}
                     </p>
