@@ -1,5 +1,5 @@
-const CMS_API_URL = process.env.CMS_API_URL || "https://cms.oduscloud.com/api/v1";
-const CMS_API_KEY = process.env.CMS_API_KEY || "";
+const CMS_API_URL = (process.env.CMS_API_URL || "https://cms.oduscloud.com/api/v1").trim();
+const CMS_API_KEY = (process.env.CMS_API_KEY || "").trim();
 
 interface CMSContentItem {
   id: string;
