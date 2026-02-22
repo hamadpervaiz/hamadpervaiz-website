@@ -50,6 +50,7 @@ export default async function MemoPage({
       title: cmsMemo.title,
       tag: cmsMemo.tag || "",
       time: cmsMemo.meta?.readTime || "",
+      featuredImage: cmsMemo.featuredImage || undefined,
       sections: cmsMemo.sections.map((s) => ({
         type: s.type as Memo["sections"][number]["type"],
         content: s.content,

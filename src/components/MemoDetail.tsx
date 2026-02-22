@@ -11,27 +11,22 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
     <main className="min-h-full overflow-x-hidden bg-[var(--bg-primary)]">
       <Header />
 
-      {/* Featured Image Placeholder */}
-      <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] flex flex-col items-center justify-center gap-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#333"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-          <circle cx="9" cy="9" r="2" />
-          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-        </svg>
-        <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[#333]">
-          FEATURED IMAGE
-        </span>
-      </div>
+      {/* Featured Image */}
+      {memo.featuredImage ? (
+        <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={memo.featuredImage} alt={memo.title} className="w-full h-full object-cover" />
+        </div>
+      ) : (
+        <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] flex flex-col items-center justify-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+          </svg>
+          <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[#333]">FEATURED IMAGE</span>
+        </div>
+      )}
 
       {/* Reading Column */}
       <div className="w-full flex justify-center px-5 sm:px-8 md:px-12">
@@ -195,33 +190,21 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   viewport={{ once: true }}
                   className="flex flex-col gap-4"
                 >
-                  <div className="w-full h-[200px] sm:h-[300px] lg:h-[400px] bg-[#0A0A0A] border border-white flex flex-col items-center justify-center gap-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#333"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <rect
-                        width="18"
-                        height="18"
-                        x="3"
-                        y="3"
-                        rx="2"
-                        ry="2"
-                      />
-                      <circle cx="9" cy="9" r="2" />
-                      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-                    </svg>
-                    <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[#444]">
-                      {section.content}
-                    </span>
-                  </div>
+                  {section.content.startsWith("http") ? (
+                    <div className="w-full overflow-hidden bg-[#0A0A0A]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={section.content} alt={section.caption || ""} className="w-full h-auto" />
+                    </div>
+                  ) : (
+                    <div className="w-full h-[200px] sm:h-[300px] lg:h-[400px] bg-[#0A0A0A] border border-white/10 flex flex-col items-center justify-center gap-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                        <circle cx="9" cy="9" r="2" />
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                      </svg>
+                      <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[#444]">{section.content}</span>
+                    </div>
+                  )}
                   {section.caption && (
                     <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.5px] leading-[1.6] text-[#666]">
                       {section.caption}

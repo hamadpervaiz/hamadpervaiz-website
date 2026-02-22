@@ -61,5 +61,7 @@ export async function fetchMemos(): Promise<CMSCollectionItem[] | null> {
 }
 
 export async function fetchMemo(slug: string): Promise<CMSCollectionItemDetail | null> {
-  return cmsGet<CMSCollectionItemDetail>(`/collections/memos/${slug}`);
+  const data = await cmsGet<{ item: CMSCollectionItem; sections: CMSCollectionItemDetail["sections"] }>(`/collections/memos/${slug}`);
+  if (!data?.item) return null;
+  return { ...data.item, sections: data.sections || [] };
 }

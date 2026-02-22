@@ -5,6 +5,7 @@ export interface Memo {
   title: string;
   tag: string;
   time: string;
+  featuredImage?: string;
   sections: {
     type: "heading" | "paragraph" | "blockquote" | "callout" | "image";
     content: string;
