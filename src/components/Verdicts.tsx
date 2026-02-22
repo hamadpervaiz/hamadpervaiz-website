@@ -3,50 +3,11 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const flagshipCard = {
-  tag: "VIDEO INTERVIEW · FEATURED",
-  title: "The Death of the Digital Middleman",
-  desc: "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms.",
-  meta: "PTV · Lahore · 2024",
-  mediaLabel: "NATIONAL TELEVISION INTERVIEW",
-  mediaIcon: "play",
-};
+type CMS = Record<string, string> | null;
 
-const sideCard = {
-  tag: "KEYNOTE",
-  title: "TechCrunch Disrupt: Battlefield 200",
-  desc: "Representing Pakistan\u2019s tech ecosystem on the global stage \u2014 competing alongside 200 startups from 30+ countries.",
-  meta: "San Francisco · 2024",
-  mediaLabel: "PHOTOS",
-  mediaIcon: "image",
-};
-
-const bottomCards = [
-  {
-    tag: "PANEL TALK",
-    title: "Systems Thinking in Emerging Markets",
-    desc: "University panel on applying systems thinking to navigate emerging market complexity.",
-    meta: "Dubai · 2025",
-    mediaLabel: "VIDEO",
-    mediaIcon: "mic",
-  },
-  {
-    tag: "CONFERENCE",
-    title: "U.S. Consulate Strategic Dialogue",
-    desc: "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.",
-    meta: "Islamabad · 2024",
-    mediaLabel: "PHOTOS",
-    mediaIcon: "image",
-  },
-  {
-    tag: "UNIVERSITY TALK",
-    title: "Building for the Next Billion",
-    desc: "Keynote address on building scalable technology infrastructure for underserved markets.",
-    meta: "LUMS · Lahore · 2025",
-    mediaLabel: "VIDEO",
-    mediaIcon: "play",
-  },
-];
+function get(cms: CMS, key: string, fallback: string): string {
+  return cms?.[`verdicts.${key}`] ?? fallback;
+}
 
 function MediaPlaceholder({
   label,
@@ -71,8 +32,48 @@ function MediaPlaceholder({
   );
 }
 
-export default function Verdicts() {
+export default function Verdicts({ cms = null }: { cms?: CMS }) {
   const [playing, setPlaying] = useState(false);
+
+  const sectionLabel = get(cms, "section_label", "// 04 — APPEARANCES & VERDICTS");
+  const heading = get(cms, "heading", "The Verdicts.");
+  const description = get(cms, "description", "Panel talks, keynotes, interviews, and conference appearances — the moments that shaped the conversation.");
+
+  const featured = {
+    tag: get(cms, "featured_tag", "VIDEO INTERVIEW · FEATURED"),
+    title: get(cms, "featured_title", "The Death of the Digital Middleman"),
+    desc: get(cms, "featured_desc", "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms."),
+    meta: get(cms, "featured_meta", "PTV · Lahore · 2024"),
+    youtube: get(cms, "featured_youtube", "hGSXbTNFXcE"),
+  };
+
+  const side = {
+    tag: get(cms, "side_tag", "KEYNOTE"),
+    title: get(cms, "side_title", "TechCrunch Disrupt: Battlefield 200"),
+    desc: get(cms, "side_desc", "Representing Pakistan\u2019s tech ecosystem on the global stage — competing alongside 200 startups from 30+ countries."),
+    meta: get(cms, "side_meta", "San Francisco · 2024"),
+  };
+
+  const bottomCards = [
+    {
+      tag: get(cms, "bottom1_tag", "PANEL TALK"),
+      title: get(cms, "bottom1_title", "Systems Thinking in Emerging Markets"),
+      desc: get(cms, "bottom1_desc", "University panel on applying systems thinking to navigate emerging market complexity."),
+      meta: get(cms, "bottom1_meta", "Dubai · 2025"),
+    },
+    {
+      tag: get(cms, "bottom2_tag", "CONFERENCE"),
+      title: get(cms, "bottom2_title", "U.S. Consulate Strategic Dialogue"),
+      desc: get(cms, "bottom2_desc", "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation."),
+      meta: get(cms, "bottom2_meta", "Islamabad · 2024"),
+    },
+    {
+      tag: get(cms, "bottom3_tag", "UNIVERSITY TALK"),
+      title: get(cms, "bottom3_title", "Building for the Next Billion"),
+      desc: get(cms, "bottom3_desc", "Keynote address on building scalable technology infrastructure for underserved markets."),
+      meta: get(cms, "bottom3_meta", "LUMS · Lahore · 2025"),
+    },
+  ];
 
   return (
     <section className="w-full bg-[var(--bg-primary)] px-5 sm:px-8 md:px-12 lg:px-6 py-16 sm:py-20 lg:py-[160px]">
@@ -88,11 +89,11 @@ export default function Verdicts() {
             <div className="flex items-center gap-4 sm:gap-5">
               <div className="w-8 sm:w-10 h-px bg-[var(--accent)]" />
               <span className="font-mono text-[9px] sm:text-[10px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
-                // 04 — APPEARANCES &amp; VERDICTS
+                {sectionLabel}
               </span>
             </div>
             <h2 className="font-playfair text-[28px] sm:text-[36px] md:text-[44px] lg:text-[56px] font-normal tracking-[-1px] sm:tracking-[-1.5px]">
-              The Verdicts.
+              {heading}
             </h2>
           </motion.div>
           <motion.p
@@ -102,8 +103,7 @@ export default function Verdicts() {
             transition={{ delay: 0.1 }}
             className="font-inter text-[15px] sm:text-[17px] font-light leading-[1.8] sm:leading-[1.9] text-[var(--text-muted)] max-w-[750px]"
           >
-            Panel talks, keynotes, interviews, and conference appearances — the
-            moments that shaped the conversation.
+            {description}
           </motion.p>
         </div>
 
@@ -120,8 +120,8 @@ export default function Verdicts() {
               {playing ? (
                 <div className="relative w-full aspect-video bg-black">
                   <iframe
-                    src="https://www.youtube.com/embed/hGSXbTNFXcE?autoplay=1&rel=0"
-                    title="The Death of the Digital Middleman — PTV Interview"
+                    src={`https://www.youtube.com/embed/${featured.youtube}?autoplay=1&rel=0`}
+                    title={featured.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="absolute inset-0 w-full h-full"
@@ -133,8 +133,8 @@ export default function Verdicts() {
                   className="relative w-full aspect-video bg-black cursor-pointer group/play"
                 >
                   <img
-                    src="https://img.youtube.com/vi/hGSXbTNFXcE/maxresdefault.jpg"
-                    alt="The Death of the Digital Middleman — PTV Interview"
+                    src={`https://img.youtube.com/vi/${featured.youtube}/maxresdefault.jpg`}
+                    alt={featured.title}
                     className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover/play:opacity-90 transition-opacity"
                   />
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
@@ -148,23 +148,23 @@ export default function Verdicts() {
                       </svg>
                     </div>
                     <span className="font-mono text-[9px] sm:text-[10px] tracking-[2px] sm:tracking-[3px] text-white/70">
-                      {flagshipCard.mediaLabel}
+                      NATIONAL TELEVISION INTERVIEW
                     </span>
                   </div>
                 </button>
               )}
               <div className="flex flex-col gap-3 sm:gap-4 p-5 sm:p-6 lg:p-8">
                 <span className="font-mono text-[9px] font-medium tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
-                  {flagshipCard.tag}
+                  {featured.tag}
                 </span>
                 <h3 className="font-playfair text-lg sm:text-xl lg:text-[28px] font-normal tracking-[-0.5px] leading-[1.25]">
-                  {flagshipCard.title}
+                  {featured.title}
                 </h3>
                 <p className="font-inter text-[13px] sm:text-sm font-light leading-[1.7] text-[var(--text-muted)]">
-                  {flagshipCard.desc}
+                  {featured.desc}
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
-                  {flagshipCard.meta}
+                  {featured.meta}
                 </span>
               </div>
             </motion.div>
@@ -177,22 +177,22 @@ export default function Verdicts() {
               className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
             >
               <MediaPlaceholder
-                label={sideCard.mediaLabel}
-                icon={sideCard.mediaIcon}
+                label="PHOTOS"
+                icon="image"
                 className="flex-1"
               />
               <div className="flex flex-col gap-3 p-5 sm:p-6 lg:p-7">
                 <span className="font-mono text-[9px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
-                  {sideCard.tag}
+                  {side.tag}
                 </span>
                 <h3 className="font-playfair text-lg sm:text-xl lg:text-[22px] font-normal tracking-[-0.3px] leading-[1.3]">
-                  {sideCard.title}
+                  {side.title}
                 </h3>
                 <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
-                  {sideCard.desc}
+                  {side.desc}
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
-                  {sideCard.meta}
+                  {side.meta}
                 </span>
               </div>
             </motion.div>
@@ -209,7 +209,7 @@ export default function Verdicts() {
                 transition={{ delay: 0.1 * i }}
                 className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
               >
-                <MediaPlaceholder label={card.mediaLabel} icon={card.mediaIcon} />
+                <MediaPlaceholder label="MEDIA" icon="image" />
                 <div className="flex flex-col gap-3 p-4 sm:p-5 lg:p-6">
                   <span className="font-mono text-[9px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
                     {card.tag}

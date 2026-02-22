@@ -13,8 +13,9 @@ import Footer from "@/components/Footer";
 import { fetchContent, fetchMemos } from "@/lib/cms";
 
 export default async function Home() {
-  const [content, memos] = await Promise.all([
+  const [content, verdictsContent, memos] = await Promise.all([
     fetchContent("home"),
+    fetchContent("verdicts"),
     fetchMemos(),
   ]);
 
@@ -27,7 +28,7 @@ export default async function Home() {
       <Doctrine />
       <Ventures />
       <SignalVsNoise />
-      <Verdicts />
+      <Verdicts cms={verdictsContent} />
       <TheMemos cmsMemos={memos} />
       <Instagram />
       <ConnectCTA />
