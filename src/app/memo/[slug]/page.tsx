@@ -4,13 +4,7 @@ import { fetchMemos, fetchMemo } from "@/lib/cms";
 import MemoDetail from "@/components/MemoDetail";
 import type { Memo } from "@/data/memos";
 
-export async function generateStaticParams() {
-  const cmsMemos = await fetchMemos();
-  if (cmsMemos) {
-    return cmsMemos.map((memo) => ({ slug: memo.slug }));
-  }
-  return memos.map((memo) => ({ slug: memo.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
