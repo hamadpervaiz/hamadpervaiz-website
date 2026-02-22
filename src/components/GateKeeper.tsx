@@ -419,7 +419,7 @@ export default function GateKeeper() {
 
               {/* Heading */}
               <h2 className="font-playfair text-[24px] sm:text-[28px] lg:text-[30px] font-normal tracking-[-0.5px] leading-[1.4] text-white">
-                &ldquo;My time is aggressively protected.&rdquo;
+                My time is aggressively protected.
               </h2>
 
               <div className="h-5 sm:h-6" />
