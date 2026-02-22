@@ -35,7 +35,7 @@ async function cmsGet<T>(path: string): Promise<T | null> {
   try {
     const res = await fetch(`${CMS_API_URL}${path}`, {
       headers: { Authorization: `Bearer ${CMS_API_KEY}` },
-      next: { revalidate: 60 },
+      cache: "no-store",
     });
     if (!res.ok) return null;
     return res.json();
