@@ -40,7 +40,6 @@ function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
           }`}
         />
       ))}
-      {/* Dots */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
         {images.map((_, i) => (
           <button
@@ -54,7 +53,6 @@ function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
           />
         ))}
       </div>
-      {/* Arrows */}
       <button
         onClick={() => setCurrent((c) => (c - 1 + images.length) % images.length)}
         className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center bg-black/50 text-white/70 hover:text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity text-sm"
@@ -69,17 +67,6 @@ function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
       </button>
     </div>
   );
-}
-
-interface VerdictItem {
-  id: string;
-  title: string;
-  slug: string;
-  featuredImage: string | null;
-  tag: string | null;
-  status: string;
-  meta: Record<string, string>;
-  publishedAt: string | null;
 }
 
 function MediaPlaceholder({
@@ -105,29 +92,29 @@ function MediaPlaceholder({
   );
 }
 
-// Hardcoded fallbacks when CMS is unavailable
-const fallbackItems: VerdictItem[] = [
-  { id: "f1", title: "The Death of the Digital Middleman", slug: "death-of-digital-middleman", featuredImage: "/images/architect-economy.jpg", tag: "VIDEO INTERVIEW · FEATURED", status: "published", meta: { role: "featured", description: "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms.", eventMeta: "PTV · Lahore · 2024", youtubeId: "hGSXbTNFXcE" }, publishedAt: null },
-  { id: "f2", title: "TechCrunch Disrupt: Battlefield 200", slug: "techcrunch-disrupt-battlefield", featuredImage: "/images/techcrunch-disrupt.jpg", tag: "KEYNOTE", status: "published", meta: { role: "side", description: "Representing Pakistan\u2019s tech ecosystem on the global stage \u2014 competing alongside 200 startups from 30+ countries.", eventMeta: "San Francisco · 2024" }, publishedAt: null },
-  { id: "f4", title: "U.S. Consulate Strategic Dialogue", slug: "us-consulate-strategic-dialogue", featuredImage: null, tag: "CONFERENCE", status: "published", meta: { role: "bottom", description: "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.", eventMeta: "Islamabad · 2024" }, publishedAt: null },
-  { id: "f5", title: "Building for the Next Billion", slug: "building-for-next-billion", featuredImage: null, tag: "UNIVERSITY TALK", status: "published", meta: { role: "bottom", description: "Keynote address on building scalable technology infrastructure for underserved markets.", eventMeta: "LUMS · Lahore · 2025" }, publishedAt: null },
+const bottomCards = [
+  {
+    id: "b1",
+    title: "U.S. Consulate Strategic Dialogue",
+    tag: "CONFERENCE",
+    description:
+      "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.",
+    eventMeta: "Islamabad · 2024",
+    featuredImage: null as string | null,
+  },
+  {
+    id: "b2",
+    title: "Building for the Next Billion",
+    tag: "UNIVERSITY TALK",
+    description:
+      "Keynote address on building scalable technology infrastructure for underserved markets.",
+    eventMeta: "LUMS · Lahore · 2025",
+    featuredImage: null as string | null,
+  },
 ];
 
-export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
+export default function Verdicts() {
   const [playing, setPlaying] = useState(false);
-  const HIDDEN_SLUGS = ["systems-thinking-emerging-markets"];
-  const allItems = (items ?? fallbackItems).filter(
-    (i) => !HIDDEN_SLUGS.includes(i.slug)
-  );
-
-  const featured = allItems.find((i) => i.meta?.role === "featured") ?? allItems[0];
-  const side = allItems.find((i) => i.meta?.role === "side") ?? allItems[1];
-  const bottomCards = allItems.filter((i) => i.meta?.role === "bottom").length > 0
-    ? allItems.filter((i) => i.meta?.role === "bottom")
-    : allItems.slice(2);
-
-  const youtubeId = featured?.meta?.youtubeId || "hGSXbTNFXcE";
-  const featuredThumb = featured?.featuredImage || "/images/architect-economy.jpg";
 
   return (
     <section className="w-full bg-[var(--bg-primary)] px-5 sm:px-8 md:px-12 lg:px-6 py-16 sm:py-20 lg:py-[160px]">
@@ -166,7 +153,7 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
         <div className="flex flex-col gap-5 sm:gap-6">
           {/* Top Row */}
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-5 sm:gap-6">
-            {/* Featured Card */}
+            {/* Featured Card — The Death of the Digital Middleman */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -176,8 +163,8 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
               {playing ? (
                 <div className="relative w-full aspect-video bg-black">
                   <iframe
-                    src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`}
-                    title={featured.title}
+                    src="https://www.youtube.com/embed/hGSXbTNFXcE?autoplay=1&rel=0"
+                    title="The Death of the Digital Middleman"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="absolute inset-0 w-full h-full"
@@ -189,8 +176,8 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
                   className="relative w-full aspect-video bg-black cursor-pointer group/play"
                 >
                   <Image
-                    src={featuredThumb}
-                    alt={featured.title}
+                    src="/images/architect-economy.jpg"
+                    alt="The Death of the Digital Middleman"
                     fill
                     sizes="(max-width: 1024px) 100vw, 66vw"
                     className="object-cover opacity-70 group-hover/play:opacity-90 transition-opacity"
@@ -213,21 +200,22 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
               )}
               <div className="flex flex-col gap-3 sm:gap-4 p-5 sm:p-6 lg:p-8">
                 <span className="font-mono text-[9px] font-medium tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
-                  {featured.tag}
+                  VIDEO INTERVIEW · FEATURED
                 </span>
                 <h3 className="font-playfair text-lg sm:text-xl lg:text-[28px] font-normal tracking-[-0.5px] leading-[1.25]">
-                  {featured.title}
+                  The Death of the Digital Middleman
                 </h3>
                 <p className="font-inter text-[13px] sm:text-sm font-light leading-[1.7] text-[var(--text-muted)]">
-                  {featured.meta?.description}
+                  A PTV exclusive on how legacy distribution models are being
+                  dismantled by architecture-first software platforms.
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
-                  {featured.meta?.eventMeta}
+                  PTV · Lahore · 2024
                 </span>
               </div>
             </motion.div>
 
-            {/* Side Card */}
+            {/* Side Card — TechCrunch Disrupt */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -235,35 +223,28 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
               transition={{ delay: 0.1 }}
               className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
             >
-              {side?.featuredImage ? (
-                <div className="relative flex-1 min-h-[160px] sm:min-h-[200px] overflow-hidden">
-                  <Image
-                    src={side.featuredImage}
-                    alt={side.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <MediaPlaceholder
-                  label="PHOTOS"
-                  icon="image"
-                  className="flex-1"
+              <div className="relative flex-1 min-h-[160px] sm:min-h-[200px] overflow-hidden">
+                <Image
+                  src="/images/techcrunch-disrupt.jpg"
+                  alt="TechCrunch Disrupt: Battlefield 200"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover"
                 />
-              )}
+              </div>
               <div className="flex flex-col gap-3 p-5 sm:p-6 lg:p-7">
                 <span className="font-mono text-[9px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
-                  {side?.tag}
+                  KEYNOTE
                 </span>
                 <h3 className="font-playfair text-lg sm:text-xl lg:text-[22px] font-normal tracking-[-0.3px] leading-[1.3]">
-                  {side?.title}
+                  TechCrunch Disrupt: Battlefield 200
                 </h3>
                 <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
-                  {side?.meta?.description}
+                  Representing Pakistan&apos;s tech ecosystem on the global stage
+                  — competing alongside 200 startups from 30+ countries.
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
-                  {side?.meta?.eventMeta}
+                  San Francisco · 2024
                 </span>
               </div>
             </motion.div>
@@ -271,7 +252,7 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
 
           {/* Bottom Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {/* Hardcoded UCP Agentic AI card — always first, disconnected from CMS */}
+            {/* Agentic AI card with carousel */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -287,7 +268,9 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
                   Agentic AI: Autonomous Systems &amp; the Future of Work
                 </h3>
                 <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
-                  A university panel exploring how agentic AI architectures are redefining autonomy, decision-making, and the future of human-machine collaboration.
+                  A university panel exploring how agentic AI architectures are
+                  redefining autonomy, decision-making, and the future of
+                  human-machine collaboration.
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
                   UCP · Lahore · 2025
@@ -295,7 +278,7 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
               </div>
             </motion.div>
 
-            {/* Remaining bottom cards from CMS or fallback */}
+            {/* Remaining bottom cards */}
             {bottomCards.map((card, i) => (
               <motion.div
                 key={card.id}
@@ -326,10 +309,10 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
                     {card.title}
                   </h3>
                   <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
-                    {card.meta?.description}
+                    {card.description}
                   </p>
                   <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
-                    {card.meta?.eventMeta}
+                    {card.eventMeta}
                   </span>
                 </div>
               </motion.div>

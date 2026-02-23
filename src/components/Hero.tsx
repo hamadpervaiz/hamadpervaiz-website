@@ -3,13 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-interface HeroProps {
-  cms?: Record<string, string> | null;
-}
-
-export default function Hero({ cms }: HeroProps) {
-  const heroTitle = cms?.["home.hero_title"] || "Hype is a temporary tactic.\nArchitecture is a permanent advantage.";
-  const heroSubtitle = cms?.["home.hero_subtitle"] || "I architect mission-critical software, invest in asymmetric\nopportunities, and build empires.";
+export default function Hero() {
   return (
     <section className="relative w-full bg-[var(--bg-primary)] overflow-hidden">
       <div className="max-w-[1200px] mx-auto relative flex flex-col lg:flex-row lg:min-h-[620px] px-5 sm:px-8 md:px-12 lg:px-6">
@@ -33,9 +27,9 @@ export default function Hero({ cms }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="font-playfair text-[28px] sm:text-[36px] md:text-[40px] lg:text-[46px] font-normal leading-[1.08] tracking-[-1px] sm:tracking-[-2px]"
           >
-            {heroTitle.split("\n").map((line, i) => (
-              <span key={i}>{i > 0 && <br />}{line}</span>
-            ))}
+            Hype is a temporary tactic.
+            <br />
+            Architecture is a permanent advantage.
           </motion.h1>
 
           <motion.div
@@ -48,9 +42,9 @@ export default function Hero({ cms }: HeroProps) {
               I am Hamad Pervaiz.
             </p>
             <p className="font-inter text-sm sm:text-base font-light leading-[1.8] text-[var(--text-dim)]">
-              {heroSubtitle.split("\n").map((line, i) => (
-                <span key={i}>{i > 0 && <br className="hidden lg:block" />}{line}</span>
-              ))}
+              I architect mission-critical software, invest in asymmetric
+              <br className="hidden lg:block" />
+              opportunities, and build empires.
             </p>
           </motion.div>
 

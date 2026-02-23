@@ -3,24 +3,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const defaultStats = [
+const stats = [
   { value: "15+", label: "YEARS ARCHITECTING" },
   { value: "04", label: "ACTIVE VENTURES" },
   { value: "$5M+", label: "CAPITAL DEPLOYED" },
   { value: "03", label: "CONTINENTS" },
 ];
 
-interface StatsProps {
-  cms?: Record<string, string> | null;
-}
-
-export default function Stats({ cms }: StatsProps) {
-  const stats = cms ? [
-    { value: cms["home.stat_1_value"] || defaultStats[0].value, label: cms["home.stat_1_label"] || defaultStats[0].label },
-    { value: cms["home.stat_2_value"] || defaultStats[1].value, label: cms["home.stat_2_label"] || defaultStats[1].label },
-    { value: cms["home.stat_3_value"] || defaultStats[2].value, label: cms["home.stat_3_label"] || defaultStats[2].label },
-    { value: cms["home.stat_4_value"] || defaultStats[3].value, label: cms["home.stat_4_label"] || defaultStats[3].label },
-  ] : defaultStats;
+export default function Stats() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 

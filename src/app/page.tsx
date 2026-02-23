@@ -10,26 +10,19 @@ import TheMemos from "@/components/TheMemos";
 import Instagram from "@/components/Instagram";
 import ConnectCTA from "@/components/ConnectCTA";
 import Footer from "@/components/Footer";
-import { fetchContent, fetchMemos, fetchVerdicts } from "@/lib/cms";
 
-export default async function Home() {
-  const [content, verdicts, memos] = await Promise.all([
-    fetchContent("home"),
-    fetchVerdicts(),
-    fetchMemos(),
-  ]);
-
+export default function Home() {
   return (
     <main className="min-h-full overflow-x-hidden">
       <Header />
-      <Hero cms={content} />
-      <Stats cms={content} />
+      <Hero />
+      <Stats />
       <SilentFlex />
       <Doctrine />
       <Ventures />
       <SignalVsNoise />
-      <Verdicts items={verdicts} />
-      <TheMemos cmsMemos={memos} />
+      <Verdicts />
+      <TheMemos />
       <Instagram />
       <ConnectCTA />
       <Footer />
