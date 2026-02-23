@@ -221,11 +221,13 @@ export default function Verdicts() {
                   VIDEO INTERVIEW · FEATURED
                 </span>
                 <h3 className="font-playfair text-lg sm:text-xl lg:text-[28px] font-normal tracking-[-0.5px] leading-[1.25]">
-                  The Death of the Digital Middleman
+                  The Creator Economy Is Dead. The Architect Economy Is Here.
                 </h3>
                 <p className="font-inter text-[13px] sm:text-sm font-light leading-[1.7] text-[var(--text-muted)]">
-                  A PTV exclusive on how legacy distribution models are being
-                  dismantled by architecture-first software platforms.
+                  A national television breakdown of why manual creators are
+                  becoming obsolete — and why the future belongs to those who
+                  build automated systems, not content. From the creator-to-architect
+                  shift to the real threat of AI replacing tool users, not thinkers.
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
                   PTV · Lahore · 2024
