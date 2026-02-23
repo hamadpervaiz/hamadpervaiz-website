@@ -101,8 +101,11 @@ export default function Instagram() {
           }}
         >
           {extendedImages.map((src, i) => (
-            <div
+            <a
               key={i}
+              href="https://www.instagram.com/hamadpervaiz/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative flex-shrink-0 w-[min(320px,70vw)] sm:w-[280px] lg:w-[320px] aspect-square rounded overflow-hidden group cursor-pointer"
             >
               <Image
@@ -112,7 +115,7 @@ export default function Instagram() {
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-            </div>
+            </a>
           ))}
         </div>
       </motion.div>
