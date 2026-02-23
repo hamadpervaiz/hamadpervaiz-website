@@ -1,8 +1,75 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+
+const UCP_IMAGES = [
+  "/images/ucp/ucp-01.jpg",
+  "/images/ucp/ucp-02.jpg",
+  "/images/ucp/ucp-03.jpg",
+  "/images/ucp/ucp-04.jpg",
+  "/images/ucp/ucp-05.jpg",
+  "/images/ucp/ucp-06.jpg",
+];
+
+function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(
+    () => setCurrent((c) => (c + 1) % images.length),
+    [images.length]
+  );
+
+  useEffect(() => {
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  return (
+    <div className="relative min-h-[160px] sm:min-h-[200px] overflow-hidden group/carousel">
+      {images.map((src, i) => (
+        <Image
+          key={src}
+          src={src}
+          alt={`${alt} ${i + 1}`}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className={`object-cover transition-opacity duration-700 ${
+            i === current ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+      {/* Dots */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`w-1.5 h-1.5 rounded-full transition-all ${
+              i === current
+                ? "bg-[var(--accent)] w-4"
+                : "bg-white/40 hover:bg-white/60"
+            }`}
+          />
+        ))}
+      </div>
+      {/* Arrows */}
+      <button
+        onClick={() => setCurrent((c) => (c - 1 + images.length) % images.length)}
+        className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center bg-black/50 text-white/70 hover:text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity text-sm"
+      >
+        ‹
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center bg-black/50 text-white/70 hover:text-white opacity-0 group-hover/carousel:opacity-100 transition-opacity text-sm"
+      >
+        ›
+      </button>
+    </div>
+  );
+}
 
 interface VerdictItem {
   id: string;
@@ -42,7 +109,7 @@ function MediaPlaceholder({
 const fallbackItems: VerdictItem[] = [
   { id: "f1", title: "The Death of the Digital Middleman", slug: "death-of-digital-middleman", featuredImage: null, tag: "VIDEO INTERVIEW · FEATURED", status: "published", meta: { role: "featured", description: "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms.", eventMeta: "PTV · Lahore · 2024", youtubeId: "hGSXbTNFXcE" }, publishedAt: null },
   { id: "f2", title: "TechCrunch Disrupt: Battlefield 200", slug: "techcrunch-disrupt-battlefield", featuredImage: "/images/techcrunch-disrupt.jpg", tag: "KEYNOTE", status: "published", meta: { role: "side", description: "Representing Pakistan\u2019s tech ecosystem on the global stage \u2014 competing alongside 200 startups from 30+ countries.", eventMeta: "San Francisco · 2024" }, publishedAt: null },
-  { id: "f3", title: "Systems Thinking in Emerging Markets", slug: "systems-thinking-emerging-markets", featuredImage: null, tag: "PANEL TALK", status: "published", meta: { role: "bottom", description: "University panel on applying systems thinking to navigate emerging market complexity.", eventMeta: "Dubai · 2025" }, publishedAt: null },
+  { id: "f3", title: "Agentic AI: Autonomous Systems & the Future of Work", slug: "agentic-ai-ucp-panel", featuredImage: null, tag: "PANEL TALK", status: "published", meta: { role: "bottom", description: "A university panel exploring how agentic AI architectures are redefining autonomy, decision-making, and the future of human-machine collaboration.", eventMeta: "UCP · Lahore · 2025", carousel: "ucp" }, publishedAt: null },
   { id: "f4", title: "U.S. Consulate Strategic Dialogue", slug: "us-consulate-strategic-dialogue", featuredImage: null, tag: "CONFERENCE", status: "published", meta: { role: "bottom", description: "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.", eventMeta: "Islamabad · 2024" }, publishedAt: null },
   { id: "f5", title: "Building for the Next Billion", slug: "building-for-next-billion", featuredImage: null, tag: "UNIVERSITY TALK", status: "published", meta: { role: "bottom", description: "Keynote address on building scalable technology infrastructure for underserved markets.", eventMeta: "LUMS · Lahore · 2025" }, publishedAt: null },
 ];
@@ -207,21 +274,50 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
 
           {/* Bottom Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {bottomCards.map((card, i) => (
+            {/* Hardcoded UCP Agentic AI card — always first, disconnected from CMS */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
+            >
+              <ImageCarousel images={UCP_IMAGES} alt="Agentic AI Panel at UCP" />
+              <div className="flex flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                <span className="font-mono text-[9px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
+                  PANEL TALK
+                </span>
+                <h3 className="font-playfair text-base sm:text-lg lg:text-xl font-normal tracking-[-0.3px] leading-[1.3]">
+                  Agentic AI: Autonomous Systems &amp; the Future of Work
+                </h3>
+                <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
+                  A university panel exploring how agentic AI architectures are redefining autonomy, decision-making, and the future of human-machine collaboration.
+                </p>
+                <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
+                  UCP · Lahore · 2025
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Remaining bottom cards from CMS or fallback */}
+            {bottomCards
+              .filter((card) => card.meta?.carousel !== "ucp")
+              .map((card, i) => (
               <motion.div
                 key={card.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 * i }}
+                transition={{ delay: 0.1 * (i + 1) }}
                 className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
               >
                 {card.featuredImage ? (
-                  <div className="min-h-[160px] sm:min-h-[200px] overflow-hidden">
-                    <img
+                  <div className="relative min-h-[160px] sm:min-h-[200px] overflow-hidden">
+                    <Image
                       src={card.featuredImage}
                       alt={card.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
                     />
                   </div>
                 ) : (
