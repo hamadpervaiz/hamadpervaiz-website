@@ -6,7 +6,7 @@ import { useRef } from "react";
 const defaultStats = [
   { value: "15+", label: "YEARS ARCHITECTING" },
   { value: "04", label: "ACTIVE VENTURES" },
-  { value: "$50M+", label: "CAPITAL DEPLOYED" },
+  { value: "$5M+", label: "CAPITAL DEPLOYED" },
   { value: "03", label: "CONTINENTS" },
 ];
 

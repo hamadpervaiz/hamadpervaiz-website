@@ -11,6 +11,7 @@ const ventures = [
     desc: "An AI-first software architecture firm building mission-critical systems for Fortune 500 enterprises.",
     role: "FOUNDER & CEO",
     featured: true,
+    href: "https://bearplex.com",
   },
   {
     num: "02",
@@ -20,6 +21,7 @@ const ventures = [
     desc: "Strategic capital for contrarian founders. <10% acceptance rate. If I\u2019m in, I\u2019m building alongside.",
     role: "MANAGING PARTNER",
     featured: false,
+    href: "https://turingventurecapital.com",
   },
   {
     num: "03",
@@ -29,6 +31,7 @@ const ventures = [
     desc: "A proprietary OS eliminating digital chaos and scaling service businesses across MENA.",
     role: "FOUNDER",
     featured: false,
+    href: "https://peopleplus.io",
   },
   {
     num: "04",
@@ -38,6 +41,7 @@ const ventures = [
     desc: "Diversified conglomerate with interests in real estate, logistics, and manufacturing.",
     role: "CHAIRMAN",
     featured: false,
+    href: "https://oduscloud.com",
   },
 ];
 
@@ -85,8 +89,11 @@ export default function Ventures() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-[30px]">
           {ventures.map((v, i) => (
-            <motion.div
+            <motion.a
               key={v.title}
+              href={v.href}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -131,7 +138,7 @@ export default function Ventures() {
                   →
                 </span>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
