@@ -140,7 +140,7 @@ export default function GateKeeper() {
   };
 
   return (
-    <main className="relative min-h-screen bg-black overflow-x-hidden">
+    <main className="relative min-h-screen bg-[var(--bg-primary)] overflow-x-hidden">
       {/* ── Gate Page (always rendered, blurred when consent modal shows) ── */}
       <div
         className={`min-h-screen flex flex-col items-center transition-all duration-500 ${
@@ -163,8 +163,8 @@ export default function GateKeeper() {
           <div className="h-8 sm:h-10" />
 
           {/* Heading */}
-          <div className="w-full flex justify-center py-8 bg-[radial-gradient(ellipse_at_center,_#6AABBF0C_0%,_transparent_70%)]">
-            <h1 className="font-playfair text-[40px] sm:text-[52px] lg:text-[64px] font-normal tracking-[-2px] text-white text-center">
+          <div className="w-full flex justify-center py-8" style={{ background: "var(--radial-heading)" }}>
+            <h1 className="font-playfair text-[40px] sm:text-[52px] lg:text-[64px] font-normal tracking-[-2px] text-[var(--text-primary)] text-center">
               The Gate.
             </h1>
           </div>
@@ -172,7 +172,7 @@ export default function GateKeeper() {
           <div className="h-5 sm:h-7" />
 
           {/* Description */}
-          <p className="font-inter text-[13px] sm:text-[15px] font-light leading-[1.9] text-[#888] text-center max-w-[520px]">
+          <p className="font-inter text-[13px] sm:text-[15px] font-light leading-[1.9] text-[var(--text-muted)] text-center max-w-[520px]">
             My time is aggressively protected. State your objective clearly. If
             there is asymmetric leverage, you will be contacted.
           </p>
@@ -180,7 +180,7 @@ export default function GateKeeper() {
           <div className="h-14 sm:h-[72px]" />
 
           {/* Intent Label */}
-          <span className="font-poppins text-[10px] font-medium tracking-[3px] text-[#777] self-start">
+          <span className="font-poppins text-[10px] font-medium tracking-[3px] text-[var(--text-dim)] self-start">
             SELECT YOUR INTENT
           </span>
 
@@ -196,25 +196,25 @@ export default function GateKeeper() {
                   onClick={() => handleIntentChange(card.key)}
                   className={`flex-1 flex flex-col gap-4 rounded-sm p-6 sm:py-8 sm:px-6 text-left transition-all duration-300 border ${
                     active
-                      ? "bg-[#080808] border-[var(--accent)]"
-                      : "bg-[#050505] border-white/10 hover:border-white/20"
+                      ? "bg-[var(--bg-card)] border-[var(--accent)]"
+                      : "bg-[var(--bg-elevated)] border-[var(--border-faint)] hover:border-[var(--border-medium)]"
                   }`}
                 >
                   <i
                     className={`icon-lucide text-[24px] transition-colors duration-300 ${
-                      active ? "text-[var(--accent)]" : "text-[#666]"
+                      active ? "text-[var(--accent)]" : "text-[var(--text-dim)]"
                     }`}
                   >
                     {card.icon}
                   </i>
                   <span
                     className={`font-poppins text-[13px] sm:text-[14px] font-semibold tracking-[0.3px] transition-colors duration-300 ${
-                      active ? "text-white" : "text-[#ccc]"
+                      active ? "text-[var(--text-primary)]" : "text-[var(--text-secondary)]"
                     }`}
                   >
                     {card.title}
                   </span>
-                  <span className="font-poppins text-[11px] sm:text-[12px] font-light leading-[1.6] text-[#777]">
+                  <span className="font-poppins text-[11px] sm:text-[12px] font-light leading-[1.6] text-[var(--text-dim)]">
                     {card.desc}
                   </span>
                 </button>
@@ -225,7 +225,7 @@ export default function GateKeeper() {
           <div className="h-12 sm:h-16" />
 
           {/* Gradient Divider */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+          <div className="w-full h-px" style={{ background: "var(--gradient-divider)" }} />
 
           <div className="h-12 sm:h-16" />
 
@@ -237,18 +237,17 @@ export default function GateKeeper() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3 }}
-              className="w-full rounded-md border border-white/12 bg-white/[0.03] backdrop-blur-2xl p-6 sm:p-8 lg:py-12 lg:px-11 flex flex-col"
+              className="w-full rounded-md border border-[var(--border-faint)] backdrop-blur-2xl p-6 sm:p-8 lg:py-12 lg:px-11 flex flex-col"
               style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 30%), rgba(255,255,255,0.03)",
+                background: "var(--form-card-bg)",
               }}
             >
               {/* Form Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
-                <span className="font-poppins text-[10px] font-medium tracking-[3px] text-[#888]">
+                <span className="font-poppins text-[10px] font-medium tracking-[3px] text-[var(--text-muted)]">
                   YOUR DETAILS
                 </span>
-                <span className="font-poppins text-[11px] font-light text-[#666]">
+                <span className="font-poppins text-[11px] font-light text-[var(--text-dim)]">
                   All fields required unless noted
                 </span>
               </div>
@@ -258,26 +257,26 @@ export default function GateKeeper() {
               {/* Row 1: Two fields */}
               <div className="flex flex-col sm:flex-row gap-5">
                 <div className="flex-1 flex flex-col gap-2.5">
-                  <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[#999]">
+                  <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[var(--text-muted)]">
                     {config.field1}
                   </label>
                   <input
                     type="text"
                     value={field1}
                     onChange={(e) => setField1(e.target.value)}
-                    className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors"
+                    className="w-full bg-[var(--bg-input)] border border-[var(--border-input)] rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-[var(--text-primary)] placeholder:text-[var(--text-dark)] outline-none focus:border-[var(--accent)]/40 transition-colors"
                     placeholder={config.field1}
                   />
                 </div>
                 <div className="flex-1 flex flex-col gap-2.5">
-                  <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[#999]">
+                  <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[var(--text-muted)]">
                     {config.field2}
                   </label>
                   <input
                     type="text"
                     value={field2}
                     onChange={(e) => setField2(e.target.value)}
-                    className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors"
+                    className="w-full bg-[var(--bg-input)] border border-[var(--border-input)] rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-[var(--text-primary)] placeholder:text-[var(--text-dark)] outline-none focus:border-[var(--accent)]/40 transition-colors"
                     placeholder={config.field2}
                   />
                 </div>
@@ -287,14 +286,14 @@ export default function GateKeeper() {
 
               {/* Field 3: Textarea */}
               <div className="flex flex-col gap-2.5">
-                <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[#999]">
+                <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[var(--text-muted)]">
                   {config.field3Label}
                 </label>
                 <textarea
                   rows={3}
                   value={field3}
                   onChange={(e) => setField3(e.target.value)}
-                  className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors resize-none leading-[1.7]"
+                  className="w-full bg-[var(--bg-input)] border border-[var(--border-input)] rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-[var(--text-primary)] placeholder:text-[var(--text-dark)] outline-none focus:border-[var(--accent)]/40 transition-colors resize-none leading-[1.7]"
                   placeholder={config.field3Placeholder}
                 />
               </div>
@@ -304,11 +303,11 @@ export default function GateKeeper() {
               {/* Field 4 */}
               <div className="flex flex-col gap-2.5">
                 <div className="flex items-center justify-between">
-                  <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[#999]">
+                  <label className="font-poppins text-[12px] font-medium tracking-[0.3px] text-[var(--text-muted)]">
                     {config.field4Label}
                   </label>
                   {config.field4Optional && (
-                    <span className="font-poppins text-[10px] italic font-light text-[#666]">
+                    <span className="font-poppins text-[10px] italic font-light text-[var(--text-dim)]">
                       Optional
                     </span>
                   )}
@@ -317,7 +316,7 @@ export default function GateKeeper() {
                   type="text"
                   value={field4}
                   onChange={(e) => setField4(e.target.value)}
-                  className="w-full bg-white/[0.025] border border-white/13 rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-white placeholder:text-[#555] outline-none focus:border-[var(--accent)]/40 transition-colors"
+                  className="w-full bg-[var(--bg-input)] border border-[var(--border-input)] rounded-md px-[18px] py-4 font-poppins text-[16px] sm:text-[15px] text-[var(--text-primary)] placeholder:text-[var(--text-dark)] outline-none focus:border-[var(--accent)]/40 transition-colors"
                   placeholder={config.field4Placeholder}
                 />
               </div>
@@ -348,15 +347,15 @@ export default function GateKeeper() {
                   submitted
                     ? "bg-[var(--accent)]/20 cursor-default"
                     : submitting
-                      ? "bg-white/60 cursor-wait"
-                      : "bg-white hover:bg-white/90"
+                      ? "bg-[var(--bg-button)]/60 cursor-wait"
+                      : "bg-[var(--bg-button)] hover:opacity-90"
                 }`}
               >
-                <span className={`font-poppins text-[12px] font-semibold tracking-[2.5px] ${submitted ? "text-[var(--accent)]" : "text-black"}`}>
+                <span className={`font-poppins text-[12px] font-semibold tracking-[2.5px] ${submitted ? "text-[var(--accent)]" : "text-[var(--text-button)]"}`}>
                   {submitted ? "REQUEST SENT" : submitting ? "SENDING..." : "SUBMIT REQUEST"}
                 </span>
                 {!submitting && !submitted && (
-                  <i className="icon-lucide text-[16px] text-black">
+                  <i className="icon-lucide text-[16px] text-[var(--text-button)]">
                     arrow-right
                   </i>
                 )}
@@ -374,7 +373,7 @@ export default function GateKeeper() {
           {/* Status Line */}
           <div className="flex items-center justify-center gap-2">
             <div className="w-[5px] h-[5px] rounded-full bg-[var(--accent)]/50" />
-            <span className="font-poppins text-[10px] tracking-[0.5px] text-[#777]">
+            <span className="font-poppins text-[10px] tracking-[0.5px] text-[var(--text-dim)]">
               Expected response within 48 hours
             </span>
           </div>
@@ -394,7 +393,7 @@ export default function GateKeeper() {
             className="fixed inset-0 z-50 flex items-center justify-center px-5"
           >
             {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-[20px]" />
+            <div className="absolute inset-0 bg-[var(--bg-modal-overlay)] backdrop-blur-[20px]" />
 
             {/* Consent Card */}
             <motion.div
@@ -402,14 +401,13 @@ export default function GateKeeper() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.97 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="relative w-full max-w-[560px] rounded-2xl border border-white/10 p-6 sm:p-10 lg:p-[52px] flex flex-col backdrop-blur-[32px]"
+              className="relative w-full max-w-[560px] rounded-2xl border border-[var(--border-faint)] p-6 sm:p-10 lg:p-[52px] flex flex-col backdrop-blur-[32px]"
               style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 40%), rgba(10,10,10,0.93)",
+                background: "var(--modal-card-bg)",
               }}
             >
               {/* Shield Icon */}
-              <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/7 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-[var(--bg-input)] border border-[var(--border-faint)] flex items-center justify-center">
                 <i className="icon-lucide text-[22px] text-[var(--accent)]">
                   shield-check
                 </i>
@@ -418,21 +416,21 @@ export default function GateKeeper() {
               <div className="h-7 sm:h-8" />
 
               {/* Heading */}
-              <h2 className="font-playfair text-[24px] sm:text-[28px] lg:text-[30px] font-normal tracking-[-0.5px] leading-[1.4] text-white">
+              <h2 className="font-playfair text-[24px] sm:text-[28px] lg:text-[30px] font-normal tracking-[-0.5px] leading-[1.4] text-[var(--text-primary)]">
                 My time is aggressively protected.
               </h2>
 
               <div className="h-5 sm:h-6" />
 
               {/* Rules */}
-              <p className="font-inter text-[13px] sm:text-[14px] font-light leading-[1.85] text-[#888]">
+              <p className="font-inter text-[13px] sm:text-[14px] font-light leading-[1.85] text-[var(--text-muted)]">
                 I do not take introductory calls, pick-your-brain sessions, or
                 unstructured meetings. I only respond to asymmetric
                 opportunities, high-leverage architectural problems, and
                 contrarian founders.
               </p>
               <br />
-              <p className="font-inter text-[13px] sm:text-[14px] font-light leading-[1.85] text-[#888]">
+              <p className="font-inter text-[13px] sm:text-[14px] font-light leading-[1.85] text-[var(--text-muted)]">
                 State your objective clearly. If you meet this criteria,
                 proceed.
               </p>
@@ -440,7 +438,7 @@ export default function GateKeeper() {
               <div className="h-8 sm:h-10" />
 
               {/* Divider */}
-              <div className="w-full h-px bg-white/7" />
+              <div className="w-full h-px bg-[var(--border-faint)]" />
 
               <div className="h-7 sm:h-9" />
 
@@ -448,12 +446,12 @@ export default function GateKeeper() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                 <button
                   onClick={() => setConsented(true)}
-                  className="flex items-center justify-center gap-2.5 bg-white rounded-full px-7 sm:px-9 py-4 hover:bg-white/90 transition-colors"
+                  className="flex items-center justify-center gap-2.5 bg-[var(--bg-button)] rounded-full px-7 sm:px-9 py-4 hover:opacity-90 transition-colors"
                 >
-                  <span className="font-poppins text-[12px] sm:text-[13px] font-semibold tracking-[0.5px] text-black whitespace-nowrap">
+                  <span className="font-poppins text-[12px] sm:text-[13px] font-semibold tracking-[0.5px] text-[var(--text-button)] whitespace-nowrap">
                     I Understand. Proceed.
                   </span>
-                  <i className="icon-lucide text-[16px] text-black">
+                  <i className="icon-lucide text-[16px] text-[var(--text-button)]">
                     arrow-right
                   </i>
                 </button>
@@ -461,7 +459,7 @@ export default function GateKeeper() {
                   onClick={() => router.push("/")}
                   className="px-5 sm:px-6 py-3 sm:py-4 hover:opacity-80 transition-opacity"
                 >
-                  <span className="font-poppins text-[12px] sm:text-[13px] text-[#555]">
+                  <span className="font-poppins text-[12px] sm:text-[13px] text-[var(--text-dark)]">
                     Leave
                   </span>
                 </button>

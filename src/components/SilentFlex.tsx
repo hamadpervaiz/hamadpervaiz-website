@@ -45,7 +45,7 @@ export default function SilentFlex() {
                 <div
                   key={i}
                   className="relative opacity-50 flex-shrink-0 max-sm:scale-[0.7] origin-center"
-                  style={{ width: logo.width, height: logo.height }}
+                  style={{ width: logo.width, height: logo.height, filter: "var(--logo-filter)" }}
                 >
                   <Image
                     src={logo.src!}

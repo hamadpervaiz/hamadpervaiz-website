@@ -1,13 +1,17 @@
 @import "tailwindcss";
 
+/* ── Dark Mode (default) ── */
 :root {
   --accent: #6AABBF;
   --bg-primary: #000000;
   --bg-secondary: #0A0A0A;
   --bg-card: #0D0D0D;
+  --bg-elevated: #050505;
   --border-primary: #1A1A1A;
   --border-secondary: #222222;
   --border-tertiary: #333333;
+  --border-faint: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.2);
   --text-primary: #FFFFFF;
   --text-secondary: #AAAAAA;
   --text-muted: #888888;
@@ -15,9 +19,117 @@
   --text-dark: #555555;
   --text-darker: #444444;
   --text-subtle: #333333;
-  --accent-glow: #00BFFF80;
-  --accent-faint: #6AABBF12;
-  --accent-tag: #00BFFF90;
+  --text-body: #D1D5DB;
+  --text-on-accent: #000000;
+  --accent-glow: rgba(0, 191, 255, 0.5);
+  --accent-faint: rgba(106, 171, 191, 0.07);
+  --accent-tag: rgba(0, 191, 255, 0.56);
+  --bg-overlay: rgba(0, 0, 0, 0.9);
+  --bg-overlay-heavy: rgba(0, 0, 0, 0.95);
+  --bg-hover: rgba(255, 255, 255, 0.02);
+  --bg-input: rgba(255, 255, 255, 0.025);
+  --border-input: rgba(255, 255, 255, 0.13);
+  --bg-button: #FFFFFF;
+  --text-button: #000000;
+  --bg-modal: rgba(10, 10, 10, 0.93);
+  --bg-modal-overlay: rgba(0, 0, 0, 0.7);
+  --shadow-accent-sm: rgba(106, 171, 191, 0.25);
+  --shadow-accent-lg: rgba(106, 171, 191, 0.4);
+  --scrollbar-track: #000;
+  --scrollbar-thumb: #333;
+  --form-card-bg: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 30%), rgba(255,255,255,0.03);
+  --modal-card-bg: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 40%), rgba(10,10,10,0.93);
+  --gradient-divider: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+  --radial-heading: radial-gradient(ellipse at center, rgba(106,171,191,0.047) 0%, transparent 70%);
+  --logo-filter: none;
+}
+
+/* ── Force dark on specific sections (e.g. image overlays) ── */
+[data-theme="dark"] {
+  --accent: #6AABBF;
+  --bg-primary: #000000;
+  --bg-secondary: #0A0A0A;
+  --bg-card: #0D0D0D;
+  --bg-elevated: #050505;
+  --border-primary: #1A1A1A;
+  --border-secondary: #222222;
+  --border-tertiary: #333333;
+  --border-faint: rgba(255, 255, 255, 0.1);
+  --border-medium: rgba(255, 255, 255, 0.2);
+  --text-primary: #FFFFFF;
+  --text-secondary: #AAAAAA;
+  --text-muted: #888888;
+  --text-dim: #666666;
+  --text-dark: #555555;
+  --text-darker: #444444;
+  --text-subtle: #333333;
+  --text-body: #D1D5DB;
+  --text-on-accent: #000000;
+  --accent-glow: rgba(0, 191, 255, 0.5);
+  --accent-faint: rgba(106, 171, 191, 0.07);
+  --accent-tag: rgba(0, 191, 255, 0.56);
+  --bg-overlay: rgba(0, 0, 0, 0.9);
+  --bg-overlay-heavy: rgba(0, 0, 0, 0.95);
+  --bg-hover: rgba(255, 255, 255, 0.02);
+  --bg-input: rgba(255, 255, 255, 0.025);
+  --border-input: rgba(255, 255, 255, 0.13);
+  --bg-button: #FFFFFF;
+  --text-button: #000000;
+  --bg-modal: rgba(10, 10, 10, 0.93);
+  --bg-modal-overlay: rgba(0, 0, 0, 0.7);
+  --shadow-accent-sm: rgba(106, 171, 191, 0.25);
+  --shadow-accent-lg: rgba(106, 171, 191, 0.4);
+  --scrollbar-track: #000;
+  --scrollbar-thumb: #333;
+  --form-card-bg: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 30%), rgba(255,255,255,0.03);
+  --modal-card-bg: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 40%), rgba(10,10,10,0.93);
+  --gradient-divider: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+  --radial-heading: radial-gradient(ellipse at center, rgba(106,171,191,0.047) 0%, transparent 70%);
+  --logo-filter: none;
+}
+
+/* ── Light Mode ── */
+[data-theme="light"] {
+  --accent: #3D8B9E;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F7F8;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F0F2F4;
+  --border-primary: #E5E7EB;
+  --border-secondary: #D1D5DB;
+  --border-tertiary: #9CA3AF;
+  --border-faint: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.15);
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --text-dim: #6B7280;
+  --text-dark: #9CA3AF;
+  --text-darker: #9CA3AF;
+  --text-subtle: #D1D5DB;
+  --text-body: #374151;
+  --text-on-accent: #FFFFFF;
+  --accent-glow: rgba(61, 139, 158, 0.3);
+  --accent-faint: rgba(61, 139, 158, 0.06);
+  --accent-tag: #3D8B9E;
+  --bg-overlay: rgba(255, 255, 255, 0.92);
+  --bg-overlay-heavy: rgba(255, 255, 255, 0.95);
+  --bg-hover: rgba(0, 0, 0, 0.02);
+  --bg-input: rgba(0, 0, 0, 0.03);
+  --border-input: rgba(0, 0, 0, 0.15);
+  --bg-button: #111827;
+  --text-button: #FFFFFF;
+  --bg-modal: rgba(255, 255, 255, 0.97);
+  --bg-modal-overlay: rgba(0, 0, 0, 0.4);
+  --shadow-accent-sm: rgba(61, 139, 158, 0.2);
+  --shadow-accent-lg: rgba(61, 139, 158, 0.35);
+  --scrollbar-track: #F5F5F5;
+  --scrollbar-thumb: #C4C4C4;
+  --form-card-bg: linear-gradient(180deg, rgba(0,0,0,0.015) 0%, transparent 30%), rgba(0,0,0,0.02);
+  --modal-card-bg: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 40%), rgba(255,255,255,0.97);
+  --gradient-divider: linear-gradient(to right, transparent, rgba(0,0,0,0.08), transparent);
+  --radial-heading: radial-gradient(ellipse at center, rgba(61,139,158,0.047) 0%, transparent 70%);
+  --logo-filter: brightness(0);
 }
 
 @layer base {
@@ -56,16 +168,16 @@
   }
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }

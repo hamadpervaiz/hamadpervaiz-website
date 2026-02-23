@@ -14,7 +14,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
 
       {/* Featured Image */}
       {memo.featuredImage ? (
-        <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] overflow-hidden">
+        <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[var(--bg-secondary)] overflow-hidden">
           <Image
             src={memo.featuredImage}
             alt={memo.title}
@@ -24,13 +24,13 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
           />
         </div>
       ) : (
-        <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] flex flex-col items-center justify-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[var(--bg-secondary)] flex flex-col items-center justify-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
             <circle cx="9" cy="9" r="2" />
             <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
           </svg>
-          <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[#333]">FEATURED IMAGE</span>
+          <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[var(--text-subtle)]">FEATURED IMAGE</span>
         </div>
       )}
 
@@ -45,7 +45,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
           >
             <Link
               href="/#memos"
-              className="font-inter text-[10px] sm:text-[11px] tracking-[1.5px] text-[#888] hover:text-[var(--accent)] transition-colors"
+              className="font-inter text-[10px] sm:text-[11px] tracking-[1.5px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
             >
               &larr; RETURN TO INDEX
             </Link>
@@ -59,37 +59,37 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="flex flex-wrap gap-y-4 border-t border-b border-white/20 py-5"
+            className="flex flex-wrap gap-y-4 border-t border-b border-[var(--border-medium)] py-5"
           >
             <div className="flex flex-col gap-1.5 w-1/2 sm:w-1/4">
-              <span className="font-inter text-[9px] tracking-[2px] text-[#555] uppercase">
+              <span className="font-inter text-[9px] tracking-[2px] text-[var(--text-dark)] uppercase">
                 AUTHOR
               </span>
-              <span className="font-inter text-[10px] tracking-[1.5px] text-[#888]">
+              <span className="font-inter text-[10px] tracking-[1.5px] text-[var(--text-muted)]">
                 H. PERVAIZ
               </span>
             </div>
             <div className="flex flex-col gap-1.5 w-1/2 sm:w-1/4">
-              <span className="font-inter text-[9px] tracking-[2px] text-[#555] uppercase">
+              <span className="font-inter text-[9px] tracking-[2px] text-[var(--text-dark)] uppercase">
                 TIMESTAMP
               </span>
-              <span className="font-inter text-[10px] tracking-[1.5px] text-[#888]">
+              <span className="font-inter text-[10px] tracking-[1.5px] text-[var(--text-muted)]">
                 {memo.fullDate}
               </span>
             </div>
             <div className="flex flex-col gap-1.5 w-1/2 sm:w-1/4">
-              <span className="font-inter text-[9px] tracking-[2px] text-[#555] uppercase">
+              <span className="font-inter text-[9px] tracking-[2px] text-[var(--text-dark)] uppercase">
                 CATEGORY
               </span>
-              <span className="font-inter text-[10px] tracking-[1.5px] text-[#888]">
+              <span className="font-inter text-[10px] tracking-[1.5px] text-[var(--text-muted)]">
                 {memo.tag}
               </span>
             </div>
             <div className="flex flex-col gap-1.5 w-1/2 sm:w-1/4">
-              <span className="font-inter text-[9px] tracking-[2px] text-[#555] uppercase">
+              <span className="font-inter text-[9px] tracking-[2px] text-[var(--text-dark)] uppercase">
                 READ_TIME
               </span>
-              <span className="font-inter text-[10px] tracking-[1.5px] text-[#888]">
+              <span className="font-inter text-[10px] tracking-[1.5px] text-[var(--text-muted)]">
                 {memo.time.replace(" READ", "").replace(" ", "_")}
               </span>
             </div>
@@ -103,7 +103,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="font-playfair text-[28px] sm:text-[36px] lg:text-[48px] font-normal tracking-[-1px] sm:tracking-[-1.5px] lg:tracking-[-2px] leading-[1.1] text-white"
+            className="font-playfair text-[28px] sm:text-[36px] lg:text-[48px] font-normal tracking-[-1px] sm:tracking-[-1.5px] lg:tracking-[-2px] leading-[1.1] text-[var(--text-primary)]"
           >
             {memo.title}
           </motion.h1>
@@ -122,7 +122,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   viewport={{ once: true }}
                 >
                   {i > 0 && <div className="h-12 sm:h-[60px]" />}
-                  <h2 className="font-mono text-[12px] sm:text-[14px] font-medium tracking-[2px] leading-none text-white">
+                  <h2 className="font-mono text-[12px] sm:text-[14px] font-medium tracking-[2px] leading-none text-[var(--text-primary)]">
                     {section.content}
                   </h2>
                   <div className="h-6 sm:h-8" />
@@ -138,7 +138,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                 >
-                  <p className="font-inter text-[15px] sm:text-[17px] lg:text-[18px] font-light leading-[1.7] text-[#D1D5DB]">
+                  <p className="font-inter text-[15px] sm:text-[17px] lg:text-[18px] font-light leading-[1.7] text-[var(--text-body)]">
                     {section.content}
                   </p>
                   <div className="h-6 sm:h-8" />
@@ -155,8 +155,8 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   viewport={{ once: true }}
                 >
                   <div className="h-8 sm:h-[60px]" />
-                  <blockquote className="border-l-2 border-white pl-6 sm:pl-8">
-                    <p className="font-playfair text-[20px] sm:text-[24px] lg:text-[28px] italic font-normal leading-[1.4] text-white">
+                  <blockquote className="border-l-2 border-[var(--text-primary)] pl-6 sm:pl-8">
+                    <p className="font-playfair text-[20px] sm:text-[24px] lg:text-[28px] italic font-normal leading-[1.4] text-[var(--text-primary)]">
                       {section.content}
                     </p>
                   </blockquote>
@@ -174,8 +174,8 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   viewport={{ once: true }}
                 >
                   <div className="h-6 sm:h-10" />
-                  <div className="bg-[#050505] border border-white/15 p-6 sm:p-8">
-                    <p className="font-inter text-[14px] sm:text-[15px] lg:text-[16px] font-light leading-[1.7] text-[#D1D5DB]">
+                  <div className="bg-[var(--bg-elevated)] border border-[var(--border-medium)] p-6 sm:p-8">
+                    <p className="font-inter text-[14px] sm:text-[15px] lg:text-[16px] font-light leading-[1.7] text-[var(--text-body)]">
                       {section.content}
                     </p>
                   </div>
@@ -194,7 +194,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   className="flex flex-col gap-4"
                 >
                   {section.content.startsWith("http") ? (
-                    <div className="relative w-full aspect-video overflow-hidden bg-[#0A0A0A]">
+                    <div className="relative w-full aspect-video overflow-hidden bg-[var(--bg-secondary)]">
                       <Image
                         src={section.content}
                         alt={section.caption || ""}
@@ -204,17 +204,17 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                       />
                     </div>
                   ) : (
-                    <div className="w-full h-[200px] sm:h-[300px] lg:h-[400px] bg-[#0A0A0A] border border-white/10 flex flex-col items-center justify-center gap-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="w-full h-[200px] sm:h-[300px] lg:h-[400px] bg-[var(--bg-secondary)] border border-[var(--border-faint)] flex flex-col items-center justify-center gap-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
                         <circle cx="9" cy="9" r="2" />
                         <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                       </svg>
-                      <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[#444]">{section.content}</span>
+                      <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[var(--text-darker)]">{section.content}</span>
                     </div>
                   )}
                   {section.caption && (
-                    <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.5px] leading-[1.6] text-[#666]">
+                    <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.5px] leading-[1.6] text-[var(--text-dim)]">
                       {section.caption}
                     </p>
                   )}
@@ -229,14 +229,14 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
           {/* End Marker */}
           <div className="h-8 sm:h-10" />
           <div className="w-full">
-            <span className="font-inter text-[12px] text-white">
+            <span className="font-inter text-[12px] text-[var(--text-primary)]">
               &#9632;
             </span>
           </div>
 
           {/* Divider */}
           <div className="h-8 sm:h-10" />
-          <div className="w-full h-px bg-white/10" />
+          <div className="w-full h-px bg-[var(--border-faint)]" />
           <div className="h-10 sm:h-12" />
 
           {/* Continue the Conversation */}
@@ -255,7 +255,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
               <div className="w-8 sm:w-10 h-px bg-[var(--accent)]" />
             </div>
 
-            <h3 className="font-playfair text-[24px] sm:text-[32px] lg:text-[36px] font-normal tracking-[-1px] leading-[1.1] text-white">
+            <h3 className="font-playfair text-[24px] sm:text-[32px] lg:text-[36px] font-normal tracking-[-1px] leading-[1.1] text-[var(--text-primary)]">
               Continue the
               <br />
               Conversation.
@@ -270,7 +270,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
               href="/connect"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-3 font-inter text-[11px] sm:text-xs font-medium tracking-[2.5px] text-black bg-[var(--accent)] px-10 sm:px-14 py-4 sm:py-5 rounded-full shadow-[0_0_20px_rgba(106,171,191,0.3)] hover:shadow-[0_0_40px_rgba(106,171,191,0.5)] transition-shadow"
+              className="flex items-center gap-3 font-inter text-[11px] sm:text-xs font-medium tracking-[2.5px] text-[var(--text-on-accent)] bg-[var(--accent)] px-10 sm:px-14 py-4 sm:py-5 rounded-full shadow-[0_0_20px_var(--shadow-accent-sm)] hover:shadow-[0_0_40px_var(--shadow-accent-lg)] transition-shadow"
             >
               LET&apos;S CONNECT
               <span className="text-sm sm:text-base">&rarr;</span>

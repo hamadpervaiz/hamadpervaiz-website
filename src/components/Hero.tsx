@@ -56,14 +56,14 @@ export default function Hero() {
           >
             <a
               href="#ventures"
-              className="flex items-center justify-center gap-3 font-inter text-[10px] sm:text-[11px] font-medium tracking-[2px] sm:tracking-[2.5px] text-black bg-[var(--accent)] px-8 sm:px-12 py-4 sm:py-5 rounded-full shadow-[0_0_12px_rgba(106,171,191,0.25)] hover:shadow-[0_0_24px_rgba(106,171,191,0.4)] transition-all w-full sm:w-auto text-center"
+              className="flex items-center justify-center gap-3 font-inter text-[10px] sm:text-[11px] font-medium tracking-[2px] sm:tracking-[2.5px] text-[var(--text-on-accent)] bg-[var(--accent)] px-8 sm:px-12 py-4 sm:py-5 rounded-full shadow-[0_0_12px_var(--shadow-accent-sm)] hover:shadow-[0_0_24px_var(--shadow-accent-lg)] transition-all w-full sm:w-auto text-center"
             >
               EXPLORE THE WORK
               <span className="text-sm">→</span>
             </a>
             <a
               href="#doctrine"
-              className="flex items-center justify-center font-inter text-[10px] sm:text-[11px] font-medium tracking-[2px] sm:tracking-[2.5px] text-[var(--accent)] border border-[var(--accent)] px-8 sm:px-12 py-4 sm:py-5 rounded-full hover:bg-[var(--accent)] hover:text-black transition-all w-full sm:w-auto text-center"
+              className="flex items-center justify-center font-inter text-[10px] sm:text-[11px] font-medium tracking-[2px] sm:tracking-[2.5px] text-[var(--accent)] border border-[var(--accent)] px-8 sm:px-12 py-4 sm:py-5 rounded-full hover:bg-[var(--accent)] hover:text-[var(--text-on-accent)] transition-all w-full sm:w-auto text-center"
             >
               READ THE DOCTRINE
             </a>

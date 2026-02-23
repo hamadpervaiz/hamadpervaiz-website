@@ -7,6 +7,7 @@ export default function SignalVsNoise() {
   return (
     <section
       id="insights"
+      data-theme="dark"
       className="relative w-full h-[450px] sm:h-[500px] lg:h-[600px] bg-[var(--bg-primary)] overflow-hidden"
     >
       <div className="absolute inset-0">

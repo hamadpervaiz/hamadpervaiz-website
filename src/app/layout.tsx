@@ -70,6 +70,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
+          }}
+        />
         <link
           href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css"
           rel="stylesheet"

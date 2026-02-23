@@ -7,7 +7,7 @@ const ventures = [
     num: "01",
     title: "BearPlex",
     tag: "AI INFRASTRUCTURE",
-    tagColor: "text-[#00BFFF90]",
+    tagColor: "text-[var(--accent-tag)]",
     desc: "An AI-first software architecture firm building mission-critical systems for Fortune 500 enterprises.",
     role: "FOUNDER & CEO",
     featured: true,
@@ -61,7 +61,7 @@ export default function Ventures() {
             className="flex flex-col gap-6 sm:gap-8"
           >
             <div className="flex items-center gap-4 sm:gap-5">
-              <div className="w-10 sm:w-12 h-px bg-[var(--accent)] shadow-[0_0_12px_rgba(0,191,255,0.5)]" />
+              <div className="w-10 sm:w-12 h-px bg-[var(--accent)] shadow-[0_0_12px_var(--accent-glow)]" />
               <span className="font-mono text-[9px] sm:text-[10px] tracking-[2px] text-[var(--accent)]">
                 // 02 — THE ECOSYSTEM
               </span>
@@ -100,7 +100,7 @@ export default function Ventures() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className={`flex flex-col border ${
                 v.featured
-                  ? "border-t-2 border-t-[var(--accent)] border-x-transparent border-b-transparent bg-gradient-to-b from-[#6AABBF12] to-transparent"
+                  ? "border-t-2 border-t-[var(--accent)] border-x-transparent border-b-transparent bg-gradient-to-b from-[var(--accent-faint)] to-transparent"
                   : "border-[var(--border-secondary)]"
               } bg-[var(--bg-primary)] group hover:border-[var(--accent)]/30 transition-all`}
             >

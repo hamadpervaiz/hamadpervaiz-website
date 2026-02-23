@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function Header() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="sticky top-0 z-50 w-full bg-black/90 backdrop-blur-md border-b border-[var(--border-primary)]"
+        className="sticky top-0 z-50 w-full bg-[var(--bg-overlay)] backdrop-blur-md border-b border-[var(--border-primary)]"
       >
         <div className="max-w-[1200px] mx-auto flex items-center justify-between h-[80px] sm:h-[90px] lg:h-[100px] px-5 sm:px-8 md:px-12 lg:px-6">
           <Link href="/" className="flex items-center gap-2.5 sm:gap-3">
@@ -44,9 +45,10 @@ export default function Header() {
             >
               INSIGHTS
             </Link>
+            <ThemeToggle />
             <Link
               href="/connect"
-              className="font-inter text-[11px] font-medium tracking-[2.5px] text-[var(--accent)] border border-[var(--accent)] px-6 lg:px-8 py-3 lg:py-3.5 hover:bg-[var(--accent)] hover:text-black transition-all"
+              className="font-inter text-[11px] font-medium tracking-[2.5px] text-[var(--accent)] border border-[var(--accent)] px-6 lg:px-8 py-3 lg:py-3.5 hover:bg-[var(--accent)] hover:text-[var(--text-on-accent)] transition-all"
             >
               LET&apos;S CONNECT
             </Link>
@@ -76,7 +78,7 @@ export default function Header() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-x-0 top-[80px] sm:top-[90px] z-40 bg-black/95 backdrop-blur-lg border-b border-[var(--border-primary)] md:hidden"
+            className="fixed inset-x-0 top-[80px] sm:top-[90px] z-40 bg-[var(--bg-overlay-heavy)] backdrop-blur-lg border-b border-[var(--border-primary)] md:hidden"
           >
             <nav className="flex flex-col items-center gap-8 py-10">
               <Link
@@ -100,6 +102,7 @@ export default function Header() {
               >
                 INSIGHTS
               </Link>
+              <ThemeToggle />
               <Link
                 href="/connect"
                 onClick={() => setMobileOpen(false)}

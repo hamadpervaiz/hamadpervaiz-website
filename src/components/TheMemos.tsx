@@ -8,7 +8,7 @@ export default function TheMemos() {
   return (
     <section
       id="memos"
-      className="w-full bg-[var(--bg-primary)] border-t border-white/10 px-5 sm:px-8 md:px-12 lg:px-6 py-16 sm:py-20 lg:py-[120px]"
+      className="w-full bg-[var(--bg-primary)] border-t border-[var(--border-faint)] px-5 sm:px-8 md:px-12 lg:px-6 py-16 sm:py-20 lg:py-[120px]"
     >
       <div className="max-w-[1200px] mx-auto flex flex-col">
         {/* Header */}
@@ -32,7 +32,7 @@ export default function TheMemos() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-inter text-[14px] sm:text-[15px] font-light leading-[1.8] text-[#A1A1AA] max-w-[600px]"
+            className="font-inter text-[14px] sm:text-[15px] font-light leading-[1.8] text-[var(--text-muted)] max-w-[600px]"
           >
             Unfiltered systems analysis, investment theses, and architectural
             breakdowns. No noise, just the raw signal.
@@ -40,7 +40,7 @@ export default function TheMemos() {
         </div>
 
         {/* Memo Rows */}
-        <div className="flex flex-col border-t border-white/10">
+        <div className="flex flex-col border-t border-[var(--border-faint)]">
           {memos.map((memo, i) => (
             <motion.div
               key={memo.slug}
@@ -51,18 +51,18 @@ export default function TheMemos() {
             >
               <Link
                 href={`/memo/${memo.slug}`}
-                className="group flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-center lg:gap-5 py-6 sm:py-8 lg:py-10 border-b border-white/10 cursor-pointer hover:bg-white/[0.02] transition-colors"
+                className="group flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-center lg:gap-5 py-6 sm:py-8 lg:py-10 border-b border-[var(--border-faint)] cursor-pointer hover:bg-[var(--bg-hover)] transition-colors"
               >
                 <span className="font-mono text-[11px] sm:text-xs tracking-[1px] text-[var(--accent)] lg:w-[80px] shrink-0">
                   {memo.date}
                 </span>
 
-                <h3 className="font-playfair text-lg sm:text-xl lg:text-[28px] font-normal tracking-[-0.5px] leading-[1.2] text-[#E5E5E5] flex-1 group-hover:text-[var(--text-primary)] transition-colors">
+                <h3 className="font-playfair text-lg sm:text-xl lg:text-[28px] font-normal tracking-[-0.5px] leading-[1.2] text-[var(--text-secondary)] flex-1 group-hover:text-[var(--text-primary)] transition-colors">
                   {memo.title}
                 </h3>
 
                 <div className="flex items-center gap-3 sm:gap-4 lg:gap-5 shrink-0">
-                  <span className="flex items-center justify-center font-mono text-[9px] sm:text-[10px] tracking-[2px] text-[var(--text-muted)] border border-white/20 px-2 sm:px-2.5 py-1 w-[100px] sm:w-[120px] text-center">
+                  <span className="flex items-center justify-center font-mono text-[9px] sm:text-[10px] tracking-[2px] text-[var(--text-muted)] border border-[var(--border-medium)] px-2 sm:px-2.5 py-1 w-[100px] sm:w-[120px] text-center">
                     {memo.tag}
                   </span>
                   <div className="flex items-center justify-end gap-3 sm:gap-4 w-auto sm:w-[140px]">
