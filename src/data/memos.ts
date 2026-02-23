@@ -356,7 +356,7 @@ export const memos: Memo[] = [
     title: "From Freelancer to Founder: The Architecture of Agency Growth",
     tag: "STRATEGY",
     time: "9 MIN READ",
-    featuredImage: "/images/ixdf/ixdf-02.jpg",
+    featuredImage: "/images/ixdf/ixdf-04.jpg",
     sections: [
       { type: "heading", content: "// 01. THE FREELANCER TRAP IS NOT ABOUT MONEY" },
       {
