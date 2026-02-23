@@ -15,7 +15,6 @@ export async function generateMetadata({
   const description = firstParagraph
     ? firstParagraph.content.slice(0, 200) + (firstParagraph.content.length > 200 ? "..." : "")
     : `${memo.tag} · ${memo.time}`;
-  const ogImage = memo.featuredImage || "/images/hero-portrait.jpg";
   return {
     title,
     description,
@@ -24,13 +23,11 @@ export async function generateMetadata({
       description,
       type: "article" as const,
       url: `/memo/${memo.slug}`,
-      images: [{ url: ogImage, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image" as const,
       title,
       description,
-      images: [ogImage],
     },
   };
 }
