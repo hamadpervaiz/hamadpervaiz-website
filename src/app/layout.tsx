@@ -48,14 +48,6 @@ export const metadata: Metadata = {
     title: "Hamad Pervaiz — Architect · Investor · Strategist",
     description:
       "I architect mission-critical software, invest in asymmetric opportunities, and build empires.",
-    images: [
-      {
-        url: "/images/hero-portrait.png",
-        width: 1200,
-        height: 630,
-        alt: "Hamad Pervaiz — Architect · Investor · Strategist",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
