@@ -72,7 +72,7 @@ export default function Instagram() {
         </motion.div>
 
         <motion.a
-          href="https://instagram.com/hamadpervaiz"
+          href="https://www.instagram.com/hamadpervaiz/"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, y: 10 }}

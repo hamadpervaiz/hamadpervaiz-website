@@ -267,7 +267,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
 
             <div className="flex flex-wrap justify-center gap-6 sm:gap-8 mt-2">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/hamadpervaiz/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-inter text-[11px] sm:text-[12px] tracking-[2px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
@@ -275,7 +275,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                 LINKEDIN
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/hamadpervaiz/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-inter text-[11px] sm:text-[12px] tracking-[2px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
@@ -283,7 +283,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                 INSTAGRAM
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com/hamadpervaiz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-inter text-[11px] sm:text-[12px] tracking-[2px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"

@@ -28,22 +28,36 @@ export default function Footer() {
           </div>
           <div className="flex items-start gap-6 sm:gap-10 lg:gap-14 flex-wrap">
             <a
-              href="#"
+              href="https://www.linkedin.com/in/hamadpervaiz/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-inter text-[12px] sm:text-[13px] tracking-[2px] text-[var(--text-dark)] hover:text-[var(--text-primary)] transition-colors"
             >
               LINKEDIN
             </a>
             <a
-              href="#"
+              href="https://x.com/hamadpervaiz"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-inter text-[12px] sm:text-[13px] tracking-[2px] text-[var(--text-dark)] hover:text-[var(--text-primary)] transition-colors"
             >
               TWITTER
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/hamadpervaiz/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-inter text-[12px] sm:text-[13px] tracking-[2px] text-[var(--text-dark)] hover:text-[var(--text-primary)] transition-colors"
             >
               INSTAGRAM
+            </a>
+            <a
+              href="https://web.facebook.com/HamadPervaizOfficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-inter text-[12px] sm:text-[13px] tracking-[2px] text-[var(--text-dark)] hover:text-[var(--text-primary)] transition-colors"
+            >
+              FACEBOOK
             </a>
           </div>
         </div>
