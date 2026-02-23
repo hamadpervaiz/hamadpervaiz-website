@@ -11,6 +11,9 @@ const UCP_IMAGES = [
   "/images/ucp/ucp-04.jpg",
   "/images/ucp/ucp-05.jpg",
   "/images/ucp/ucp-06.jpg",
+  "/images/ucp/ucp-07.jpg",
+  "/images/ucp/ucp-08.jpg",
+  "/images/ucp/ucp-09.jpg",
 ];
 
 function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
