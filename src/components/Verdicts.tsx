@@ -109,14 +109,16 @@ function MediaPlaceholder({
 const fallbackItems: VerdictItem[] = [
   { id: "f1", title: "The Death of the Digital Middleman", slug: "death-of-digital-middleman", featuredImage: null, tag: "VIDEO INTERVIEW · FEATURED", status: "published", meta: { role: "featured", description: "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms.", eventMeta: "PTV · Lahore · 2024", youtubeId: "hGSXbTNFXcE" }, publishedAt: null },
   { id: "f2", title: "TechCrunch Disrupt: Battlefield 200", slug: "techcrunch-disrupt-battlefield", featuredImage: "/images/techcrunch-disrupt.jpg", tag: "KEYNOTE", status: "published", meta: { role: "side", description: "Representing Pakistan\u2019s tech ecosystem on the global stage \u2014 competing alongside 200 startups from 30+ countries.", eventMeta: "San Francisco · 2024" }, publishedAt: null },
-  { id: "f3", title: "Agentic AI: Autonomous Systems & the Future of Work", slug: "agentic-ai-ucp-panel", featuredImage: null, tag: "PANEL TALK", status: "published", meta: { role: "bottom", description: "A university panel exploring how agentic AI architectures are redefining autonomy, decision-making, and the future of human-machine collaboration.", eventMeta: "UCP · Lahore · 2025", carousel: "ucp" }, publishedAt: null },
   { id: "f4", title: "U.S. Consulate Strategic Dialogue", slug: "us-consulate-strategic-dialogue", featuredImage: null, tag: "CONFERENCE", status: "published", meta: { role: "bottom", description: "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.", eventMeta: "Islamabad · 2024" }, publishedAt: null },
   { id: "f5", title: "Building for the Next Billion", slug: "building-for-next-billion", featuredImage: null, tag: "UNIVERSITY TALK", status: "published", meta: { role: "bottom", description: "Keynote address on building scalable technology infrastructure for underserved markets.", eventMeta: "LUMS · Lahore · 2025" }, publishedAt: null },
 ];
 
 export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
   const [playing, setPlaying] = useState(false);
-  const allItems = items ?? fallbackItems;
+  const HIDDEN_SLUGS = ["systems-thinking-emerging-markets"];
+  const allItems = (items ?? fallbackItems).filter(
+    (i) => !HIDDEN_SLUGS.includes(i.slug)
+  );
 
   const featured = allItems.find((i) => i.meta?.role === "featured") ?? allItems[0];
   const side = allItems.find((i) => i.meta?.role === "side") ?? allItems[1];
@@ -299,9 +301,7 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
             </motion.div>
 
             {/* Remaining bottom cards from CMS or fallback */}
-            {bottomCards
-              .filter((card) => card.meta?.carousel !== "ucp")
-              .map((card, i) => (
+            {bottomCards.map((card, i) => (
               <motion.div
                 key={card.id}
                 initial={{ opacity: 0, y: 20 }}
