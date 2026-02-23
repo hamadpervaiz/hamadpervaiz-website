@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 
 interface VerdictItem {
   id: string;
@@ -40,7 +41,7 @@ function MediaPlaceholder({
 // Hardcoded fallbacks when CMS is unavailable
 const fallbackItems: VerdictItem[] = [
   { id: "f1", title: "The Death of the Digital Middleman", slug: "death-of-digital-middleman", featuredImage: null, tag: "VIDEO INTERVIEW · FEATURED", status: "published", meta: { role: "featured", description: "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms.", eventMeta: "PTV · Lahore · 2024", youtubeId: "hGSXbTNFXcE" }, publishedAt: null },
-  { id: "f2", title: "TechCrunch Disrupt: Battlefield 200", slug: "techcrunch-disrupt-battlefield", featuredImage: null, tag: "KEYNOTE", status: "published", meta: { role: "side", description: "Representing Pakistan\u2019s tech ecosystem on the global stage \u2014 competing alongside 200 startups from 30+ countries.", eventMeta: "San Francisco · 2024" }, publishedAt: null },
+  { id: "f2", title: "TechCrunch Disrupt: Battlefield 200", slug: "techcrunch-disrupt-battlefield", featuredImage: "/images/techcrunch-disrupt.jpg", tag: "KEYNOTE", status: "published", meta: { role: "side", description: "Representing Pakistan\u2019s tech ecosystem on the global stage \u2014 competing alongside 200 startups from 30+ countries.", eventMeta: "San Francisco · 2024" }, publishedAt: null },
   { id: "f3", title: "Systems Thinking in Emerging Markets", slug: "systems-thinking-emerging-markets", featuredImage: null, tag: "PANEL TALK", status: "published", meta: { role: "bottom", description: "University panel on applying systems thinking to navigate emerging market complexity.", eventMeta: "Dubai · 2025" }, publishedAt: null },
   { id: "f4", title: "U.S. Consulate Strategic Dialogue", slug: "us-consulate-strategic-dialogue", featuredImage: null, tag: "CONFERENCE", status: "published", meta: { role: "bottom", description: "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.", eventMeta: "Islamabad · 2024" }, publishedAt: null },
   { id: "f5", title: "Building for the Next Billion", slug: "building-for-next-billion", featuredImage: null, tag: "UNIVERSITY TALK", status: "published", meta: { role: "bottom", description: "Keynote address on building scalable technology infrastructure for underserved markets.", eventMeta: "LUMS · Lahore · 2025" }, publishedAt: null },
@@ -171,11 +172,13 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
               className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
             >
               {side?.featuredImage ? (
-                <div className="flex-1 min-h-[160px] sm:min-h-[200px] overflow-hidden">
-                  <img
+                <div className="relative flex-1 min-h-[160px] sm:min-h-[200px] overflow-hidden">
+                  <Image
                     src={side.featuredImage}
                     alt={side.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover"
                   />
                 </div>
               ) : (
