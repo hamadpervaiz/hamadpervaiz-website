@@ -31,6 +31,11 @@ const IXDF_IMAGES = [
   "/images/ixdf/ixdf-04.jpg",
 ];
 
+const MENTORING_IMAGES = [
+  "/images/mentoring/mentoring-01.jpg",
+  "/images/mentoring/mentoring-02.jpg",
+];
+
 function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
   const [current, setCurrent] = useState(0);
 
@@ -348,6 +353,33 @@ export default function Verdicts() {
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
                   IxDF Sessions · Lahore · 2025
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Startup mentoring keynote card with carousel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
+            >
+              <ImageCarousel images={MENTORING_IMAGES} alt="Startup Mentoring Keynote" />
+              <div className="flex flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                <span className="font-mono text-[9px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
+                  KEYNOTE &amp; MENTORING
+                </span>
+                <h3 className="font-playfair text-base sm:text-lg lg:text-xl font-normal tracking-[-0.3px] leading-[1.3]">
+                  Scaling Beyond the Founder: Systems for Growth
+                </h3>
+                <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
+                  A keynote and hands-on mentoring session with early-stage
+                  founders on building the operational architecture needed to
+                  scale from solo hustle to a self-sustaining company.
+                </p>
+                <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
+                  Lahore · 2025
                 </span>
               </div>
             </motion.div>
