@@ -107,7 +107,7 @@ function MediaPlaceholder({
 
 // Hardcoded fallbacks when CMS is unavailable
 const fallbackItems: VerdictItem[] = [
-  { id: "f1", title: "The Death of the Digital Middleman", slug: "death-of-digital-middleman", featuredImage: null, tag: "VIDEO INTERVIEW · FEATURED", status: "published", meta: { role: "featured", description: "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms.", eventMeta: "PTV · Lahore · 2024", youtubeId: "hGSXbTNFXcE" }, publishedAt: null },
+  { id: "f1", title: "The Death of the Digital Middleman", slug: "death-of-digital-middleman", featuredImage: "/images/architect-economy.jpg", tag: "VIDEO INTERVIEW · FEATURED", status: "published", meta: { role: "featured", description: "A PTV exclusive on how legacy distribution models are being dismantled by architecture-first software platforms.", eventMeta: "PTV · Lahore · 2024", youtubeId: "hGSXbTNFXcE" }, publishedAt: null },
   { id: "f2", title: "TechCrunch Disrupt: Battlefield 200", slug: "techcrunch-disrupt-battlefield", featuredImage: "/images/techcrunch-disrupt.jpg", tag: "KEYNOTE", status: "published", meta: { role: "side", description: "Representing Pakistan\u2019s tech ecosystem on the global stage \u2014 competing alongside 200 startups from 30+ countries.", eventMeta: "San Francisco · 2024" }, publishedAt: null },
   { id: "f4", title: "U.S. Consulate Strategic Dialogue", slug: "us-consulate-strategic-dialogue", featuredImage: null, tag: "CONFERENCE", status: "published", meta: { role: "bottom", description: "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.", eventMeta: "Islamabad · 2024" }, publishedAt: null },
   { id: "f5", title: "Building for the Next Billion", slug: "building-for-next-billion", featuredImage: null, tag: "UNIVERSITY TALK", status: "published", meta: { role: "bottom", description: "Keynote address on building scalable technology infrastructure for underserved markets.", eventMeta: "LUMS · Lahore · 2025" }, publishedAt: null },
@@ -127,6 +127,7 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
     : allItems.slice(2);
 
   const youtubeId = featured?.meta?.youtubeId || "hGSXbTNFXcE";
+  const featuredThumb = featured?.featuredImage || "/images/architect-economy.jpg";
 
   return (
     <section className="w-full bg-[var(--bg-primary)] px-5 sm:px-8 md:px-12 lg:px-6 py-16 sm:py-20 lg:py-[160px]">
@@ -187,19 +188,13 @@ export default function Verdicts({ items }: { items?: VerdictItem[] | null }) {
                   onClick={() => setPlaying(true)}
                   className="relative w-full aspect-video bg-black cursor-pointer group/play"
                 >
-                  {featured.featuredImage ? (
-                    <img
-                      src={featured.featuredImage}
-                      alt={featured.title}
-                      className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover/play:opacity-90 transition-opacity"
-                    />
-                  ) : (
-                    <img
-                      src={`https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`}
-                      alt={featured.title}
-                      className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover/play:opacity-90 transition-opacity"
-                    />
-                  )}
+                  <Image
+                    src={featuredThumb}
+                    alt={featured.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    className="object-cover opacity-70 group-hover/play:opacity-90 transition-opacity"
+                  />
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-white/80 flex items-center justify-center group-hover/play:border-[var(--accent)] group-hover/play:scale-110 transition-all">
                       <svg
