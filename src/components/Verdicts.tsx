@@ -24,6 +24,13 @@ const KINNAIRD_IMAGES = [
   "/images/kinnaird/kinnaird-5.jpg",
 ];
 
+const IXDF_IMAGES = [
+  "/images/ixdf/ixdf-01.jpg",
+  "/images/ixdf/ixdf-02.jpg",
+  "/images/ixdf/ixdf-03.jpg",
+  "/images/ixdf/ixdf-04.jpg",
+];
+
 function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
   const [current, setCurrent] = useState(0);
 
@@ -312,6 +319,33 @@ export default function Verdicts() {
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
                   Kinnaird College · Lahore · 2025
+                </span>
+              </div>
+            </motion.div>
+
+            {/* IxDF interactive session card with carousel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
+            >
+              <ImageCarousel images={IXDF_IMAGES} alt="IxDF Interactive Session" />
+              <div className="flex flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                <span className="font-mono text-[9px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
+                  INTERACTIVE SESSION
+                </span>
+                <h3 className="font-playfair text-base sm:text-lg lg:text-xl font-normal tracking-[-0.3px] leading-[1.3]">
+                  From Freelancer to Founder: Scaling a Design Agency
+                </h3>
+                <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
+                  An interactive session with UX designers and agency owners on
+                  the operational architecture behind turning solo design work
+                  into a scalable, client-driven business.
+                </p>
+                <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
+                  IxDF Sessions · Lahore · 2025
                 </span>
               </div>
             </motion.div>
