@@ -45,7 +45,7 @@ function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
   }, [next]);
 
   return (
-    <div className="relative min-h-[160px] sm:min-h-[200px] overflow-hidden group/carousel">
+    <div className="relative aspect-[3/4] overflow-hidden group/carousel">
       {images.map((src, i) => (
         <Image
           key={src}
