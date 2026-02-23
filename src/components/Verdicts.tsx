@@ -115,26 +115,7 @@ function MediaPlaceholder({
   );
 }
 
-const bottomCards = [
-  {
-    id: "b1",
-    title: "U.S. Consulate Strategic Dialogue",
-    tag: "CONFERENCE",
-    description:
-      "High-level strategic dialogue on Pakistan\u2019s tech ecosystem and cross-border innovation.",
-    eventMeta: "Islamabad · 2024",
-    featuredImage: null as string | null,
-  },
-  {
-    id: "b2",
-    title: "Building for the Next Billion",
-    tag: "UNIVERSITY TALK",
-    description:
-      "Keynote address on building scalable technology infrastructure for underserved markets.",
-    eventMeta: "LUMS · Lahore · 2025",
-    featuredImage: null as string | null,
-  },
-];
+const bottomCards: { id: string; title: string; tag: string; description: string; eventMeta: string; featuredImage: string | null }[] = [];
 
 export default function Verdicts() {
   const [playing, setPlaying] = useState(false);
