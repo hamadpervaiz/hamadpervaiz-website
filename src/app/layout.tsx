@@ -37,9 +37,37 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hamadpervaiz.com"),
   title: "Hamad Pervaiz — Architect · Investor · Strategist",
   description:
     "I architect mission-critical software, invest in asymmetric opportunities, and build empires.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Hamad Pervaiz",
+    title: "Hamad Pervaiz — Architect · Investor · Strategist",
+    description:
+      "I architect mission-critical software, invest in asymmetric opportunities, and build empires.",
+    images: [
+      {
+        url: "/images/hero-portrait.png",
+        width: 1200,
+        height: 630,
+        alt: "Hamad Pervaiz — Architect · Investor · Strategist",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hamad Pervaiz — Architect · Investor · Strategist",
+    description:
+      "I architect mission-critical software, invest in asymmetric opportunities, and build empires.",
+    images: ["/images/hero-portrait.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

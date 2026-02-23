@@ -15,17 +15,43 @@ export async function generateMetadata({
 
   const cmsMemo = await fetchMemo(slug);
   if (cmsMemo) {
+    const title = `${cmsMemo.title} — Hamad Pervaiz`;
+    const description = `${cmsMemo.tag || ""} · ${cmsMemo.meta?.readTime || ""}`;
     return {
-      title: `${cmsMemo.title} — Hamad Pervaiz`,
-      description: `${cmsMemo.tag || ""} · ${cmsMemo.meta?.readTime || ""}`,
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        type: "article",
+        ...(cmsMemo.featuredImage && {
+          images: [{ url: cmsMemo.featuredImage, alt: cmsMemo.title }],
+        }),
+      },
+      twitter: {
+        title,
+        description,
+        ...(cmsMemo.featuredImage && { images: [cmsMemo.featuredImage] }),
+      },
     };
   }
 
   const memo = getMemoBySlug(slug);
   if (!memo) return { title: "Memo Not Found" };
+  const title = `${memo.title} — Hamad Pervaiz`;
+  const description = `${memo.tag} · ${memo.time}`;
   return {
-    title: `${memo.title} — Hamad Pervaiz`,
-    description: `${memo.tag} · ${memo.time}`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      title,
+      description,
+    },
   };
 }
 
