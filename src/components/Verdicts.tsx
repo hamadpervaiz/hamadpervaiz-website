@@ -16,6 +16,14 @@ const UCP_IMAGES = [
   "/images/ucp/ucp-09.jpg",
 ];
 
+const KINNAIRD_IMAGES = [
+  "/images/kinnaird/kinnaird-1.jpg",
+  "/images/kinnaird/kinnaird-2.jpg",
+  "/images/kinnaird/kinnaird-3.jpg",
+  "/images/kinnaird/kinnaird-4.jpg",
+  "/images/kinnaird/kinnaird-5.jpg",
+];
+
 function ImageCarousel({ images, alt }: { images: string[]; alt: string }) {
   const [current, setCurrent] = useState(0);
 
@@ -277,6 +285,33 @@ export default function Verdicts() {
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
                   UCP · Lahore · 2025
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Kinnaird College keynote card with carousel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col border border-[var(--border-primary)] group hover:border-[var(--accent)]/20 transition-colors"
+            >
+              <ImageCarousel images={KINNAIRD_IMAGES} alt="Keynote at Kinnaird College" />
+              <div className="flex flex-col gap-3 p-4 sm:p-5 lg:p-6">
+                <span className="font-mono text-[9px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
+                  KEYNOTE
+                </span>
+                <h3 className="font-playfair text-base sm:text-lg lg:text-xl font-normal tracking-[-0.3px] leading-[1.3]">
+                  The Architecture of Innovation: Building What Lasts
+                </h3>
+                <p className="font-inter text-[13px] font-light leading-[1.7] text-[var(--text-muted)]">
+                  A keynote on why lasting technology companies are built on
+                  architectural discipline — not trends — and what the next
+                  generation of builders should focus on.
+                </p>
+                <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
+                  Kinnaird College · Lahore · 2025
                 </span>
               </div>
             </motion.div>
