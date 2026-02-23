@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,9 +14,14 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
 
       {/* Featured Image */}
       {memo.featuredImage ? (
-        <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={memo.featuredImage} alt={memo.title} className="w-full h-full object-cover" />
+        <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] overflow-hidden">
+          <Image
+            src={memo.featuredImage}
+            alt={memo.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
       ) : (
         <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[#0A0A0A] flex flex-col items-center justify-center gap-3">
@@ -188,9 +194,14 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
                   className="flex flex-col gap-4"
                 >
                   {section.content.startsWith("http") ? (
-                    <div className="w-full overflow-hidden bg-[#0A0A0A]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={section.content} alt={section.caption || ""} className="w-full h-auto" />
+                    <div className="relative w-full aspect-video overflow-hidden bg-[#0A0A0A]">
+                      <Image
+                        src={section.content}
+                        alt={section.caption || ""}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 560px"
+                        className="object-cover"
+                      />
                     </div>
                   ) : (
                     <div className="w-full h-[200px] sm:h-[300px] lg:h-[400px] bg-[#0A0A0A] border border-white/10 flex flex-col items-center justify-center gap-3">

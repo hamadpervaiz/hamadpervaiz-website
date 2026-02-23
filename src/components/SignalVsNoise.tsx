@@ -11,9 +11,10 @@ export default function SignalVsNoise() {
     >
       <div className="absolute inset-0">
         <Image
-          src="/images/switzerland-background.png"
+          src="/images/switzerland-background.jpg"
           alt="Signal background"
           fill
+          sizes="100vw"
           className="object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/30" />

@@ -78,9 +78,10 @@ export default function Hero() {
           className="relative w-full lg:w-[45%] h-[350px] sm:h-[450px] lg:h-auto border border-[var(--border-primary)] overflow-hidden"
         >
           <Image
-            src="/images/hero-portrait.png"
+            src="/images/hero-portrait.jpg"
             alt="Hamad Pervaiz"
             fill
+            sizes="(max-width: 1024px) 100vw, 45vw"
             className="object-cover object-top"
             priority
           />

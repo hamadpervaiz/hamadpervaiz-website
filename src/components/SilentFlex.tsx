@@ -51,6 +51,7 @@ export default function SilentFlex() {
                     src={logo.src!}
                     alt="Partner logo"
                     fill
+                    sizes="120px"
                     className="object-contain"
                   />
                 </div>

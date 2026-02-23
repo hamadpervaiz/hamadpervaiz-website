@@ -271,7 +271,7 @@ export const memos: Memo[] = [
     title: "Signal vs. Noise: The Discipline of Strategic Altitude",
     tag: "PHILOSOPHY",
     time: "7 MIN READ",
-    featuredImage: "/images/switzerland-background.png",
+    featuredImage: "/images/switzerland-background.jpg",
     sections: [
       { type: "heading", content: "// 01. THE NEW SCARCITY" },
       {
