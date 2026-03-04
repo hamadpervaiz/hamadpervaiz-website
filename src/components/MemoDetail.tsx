@@ -24,13 +24,63 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
           />
         </div>
       ) : (
-        <div className="w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[var(--bg-secondary)] flex flex-col items-center justify-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text-subtle)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-            <circle cx="9" cy="9" r="2" />
-            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-          </svg>
-          <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[var(--text-subtle)]">FEATURED IMAGE</span>
+        <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[var(--bg-secondary)] overflow-hidden flex items-end">
+          {/* Subtle grid pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                "linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px)",
+              backgroundSize: "60px 60px",
+            }}
+          />
+          {/* Radial glow */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.06]"
+            style={{ background: "radial-gradient(circle, var(--accent), transparent 70%)" }}
+          />
+          {/* Content */}
+          <div className="relative z-10 w-full px-8 sm:px-12 lg:px-20 pb-10 sm:pb-14 lg:pb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="flex items-center gap-4 mb-5 sm:mb-6"
+            >
+              <div className="w-8 sm:w-10 h-px bg-[var(--accent)]" />
+              <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[var(--accent)]">
+                {memo.tag}
+              </span>
+            </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="font-playfair text-[32px] sm:text-[44px] lg:text-[60px] font-normal tracking-[-1px] sm:tracking-[-2px] lg:tracking-[-3px] leading-[1.05] text-[var(--text-primary)] max-w-[900px]"
+            >
+              {memo.title}
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35 }}
+              className="mt-5 sm:mt-6 flex items-center gap-4"
+            >
+              <span className="font-mono text-[10px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
+                H. PERVAIZ
+              </span>
+              <span className="text-[var(--text-subtle)]">/</span>
+              <span className="font-mono text-[10px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
+                {memo.fullDate}
+              </span>
+              <span className="text-[var(--text-subtle)]">/</span>
+              <span className="font-mono text-[10px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
+                {memo.time}
+              </span>
+            </motion.div>
+          </div>
+          {/* Bottom fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--bg-primary)] to-transparent" />
         </div>
       )}
 
