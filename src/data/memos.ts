@@ -15,6 +15,100 @@ export interface Memo {
 
 export const memos: Memo[] = [
   {
+    slug: "the-december-line",
+    date: "2026.03",
+    fullDate: "2026.03.04",
+    title: "The December Line",
+    tag: "DOCTRINE",
+    time: "11 MIN READ",
+    sections: [
+      { type: "heading", content: "// 01. THE LINE WAS DRAWN IN DECEMBER" },
+      {
+        type: "paragraph",
+        content:
+          "Andrej Karpathy said it plainly last week: coding agents didn\u2019t work before December and they work now. Michael Truell, CEO of Cursor, published the data the same day: 35% of the pull requests Cursor merges internally are now written by autonomous agents running on cloud VMs. Agent usage at Cursor grew fifteenfold in one year. Tab autocomplete users \u2014 the people still typing code keystroke by keystroke \u2014 are now outnumbered two to one by agent users. Two to one.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "This is not a product launch. This is a phase transition. And like every phase transition in computing history, most of the industry is responding to it with the wrong mental model. They are treating autonomous coding agents as a better tool. They are not. They are a different architecture. And if you do not understand the difference between a better tool and a different architecture, everything I have been writing in these memos has been about that distinction.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "Karpathy described setting up a video analysis system on his home server \u2014 vLLM deployment, endpoint configuration, web UI, systemd services, documentation \u2014 by writing a single English paragraph and walking away for thirty minutes. The agent hit errors. It researched solutions. It debugged. It tested. It came back with a report and a working system. That was a weekend project three months ago. Today it is something you kick off between calls. The people still manually writing infrastructure code are not doing it wrong. They are doing something that no longer needs to be done by a human.",
+      },
+      { type: "heading", content: "// 02. THE THIRD ERA IS AN ARCHITECTURE STORY" },
+      {
+        type: "paragraph",
+        content:
+          "Truell frames the evolution in three eras. First: tab autocomplete. The AI finishes your keystrokes. Second: synchronous agents. You prompt, the agent executes, you review, you prompt again. Third \u2014 now \u2014 autonomous cloud agents. You define the task, the agent runs on its own VM, works through problems for hours, and delivers a reviewable artifact. Not a diff. A working system with logs, previews, and test results.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "Most people are reading this as a story about developer productivity. It is not. It is a story about the structural obsolescence of the tool-user model. Tab autocomplete made tool users faster. Synchronous agents kept tool users in the loop. Cloud agents removed the tool user from the loop entirely. The human is no longer in the execution path. The human is in the architecture path \u2014 defining what gets built, how it gets verified, and what success looks like. Executing the code is the agent\u2019s problem now.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "This is exactly the shift I described in The Architect Economy, playing out in real time within the single most measurable profession in knowledge work. Programmers have metrics. They have commits, PRs, test coverage, deploy frequency. And across every one of those metrics, the story is the same: agents are outpacing humans on execution, and the humans who are thriving are the ones who stopped executing and started orchestrating.",
+      },
+      {
+        type: "blockquote",
+        content:
+          "The December line was not drawn by a new model. It was drawn by the convergence of model quality, tool orchestration, and persistent memory crossing the threshold where autonomous multi-step execution became reliable. That threshold changes everything downstream.",
+      },
+      { type: "heading", content: "// 03. WHAT THIS MEANS FOR SIXTY-FIVE ENGINEERS" },
+      {
+        type: "paragraph",
+        content:
+          "When I read Karpathy\u2019s post, I did not see a threat to BearPlex. I saw a vindication of how we built it. For three years, I have been saying that the value of an engineering team is not in the code it types but in the systems it architects. That the companies who survive the AI transition will be the ones whose engineers think in systems, not syntax. That operational skill \u2014 writing code faster, debugging faster, shipping faster \u2014 is exactly what AI commoditizes first.",
+      },
+      {
+        type: "callout",
+        content:
+          "At BearPlex, we have been moving toward this model deliberately. Our engineers do not just write code. They design automated pipelines, define agent workflows, build the orchestration logic that determines how AI systems interact with client infrastructure. The December line did not disrupt our model. It accelerated it. An engineer who can decompose a complex system into agent-executable tasks, define verification criteria, and manage five parallel agent instances is worth more today than they were six months ago. An engineer who can only write code is worth less. That divergence will widen every quarter.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "Truell\u2019s data makes the case quantitatively. At Cursor \u2014 a company whose entire business is developer tooling \u2014 the developers who adopted the third-era model show three characteristics: agents produce nearly 100% of their code, they spend their time on decomposition and review, and they run multiple agents in parallel rather than babysitting one. That is not a different tool. That is a different job. The title is still \u201Cengineer\u201D but the work is now architectural: scoping, decomposing, orchestrating, verifying. The typing is over.",
+      },
+      {
+        type: "blockquote",
+        content:
+          "The engineer who can orchestrate a fleet of coding agents toward a coherent system outcome is the new 10x engineer. Not because they write ten times more code \u2014 but because they architect the system that writes it.",
+      },
+      { type: "heading", content: "// 04. ORCHESTRATION IS THE NEW MOAT" },
+      {
+        type: "paragraph",
+        content:
+          "Karpathy called it \u201Cagentic engineering.\u201D Truell described it as building \u201Cthe factory that creates your software.\u201D I have been calling it the Architect Economy. The language is different. The structural insight is identical: the era of humans as execution engines is ending. The era of humans as system architects is beginning. And the gap between those who understand this and those who do not will be the defining economic divide of the next decade.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "But here is what neither Karpathy nor Truell said explicitly, and what I believe is the real insight: orchestration is harder than execution. Dramatically harder. Writing code is a well-defined skill with tight feedback loops. Orchestrating agents \u2014 decomposing ambiguous problems, defining verification criteria for non-deterministic outputs, managing state across parallel autonomous processes, building retry logic for systems that can fail in novel ways every time \u2014 that is systems architecture at a level most engineers have never been trained for.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "This is where the moat forms. The models are commoditizing. Karpathy acknowledged it. Truell acknowledged it. The intelligence is becoming table stakes. But orchestration logic \u2014 the architecture that determines how agents coordinate, what they escalate, how they share context, when they stop \u2014 that is proprietary, hard-won, and compounding. Every successful orchestration run generates knowledge about failure modes, decomposition strategies, and verification patterns that makes the next run more reliable. That is a flywheel. And flywheels, held long enough, become moats.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "The founders and engineers who are still asking \u201Cwhich AI coding tool should I use?\u201D are asking the wrong question. The right question is: what is the orchestration architecture that lets me deploy twenty agents against a system problem and trust the output? That question has no off-the-shelf answer. It requires the kind of thinking that only comes from building systems under real constraints, for real clients, with real consequences for failure. That is what BearPlex has been doing for thirteen years. The tools changed in December. The architecture did not.",
+      },
+      {
+        type: "paragraph",
+        content:
+          "Hype is a temporary tactic. Architecture is a permanent advantage. The December line just made the difference visible to everyone.",
+      },
+    ],
+  },
+  {
     slug: "the-architect-economy",
     date: "2026.02",
     fullDate: "2026.02.23",
