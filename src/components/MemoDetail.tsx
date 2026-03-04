@@ -8,15 +8,17 @@ import Footer from "@/components/Footer";
 import type { Memo } from "@/data/memos";
 
 export default function MemoDetail({ memo }: { memo: Memo }) {
+  const hasImage = !!memo.featuredImage;
+
   return (
     <main className="min-h-full overflow-x-hidden bg-[var(--bg-primary)]">
       <Header />
 
       {/* Featured Image */}
-      {memo.featuredImage ? (
+      {hasImage ? (
         <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[var(--bg-secondary)] overflow-hidden">
           <Image
-            src={memo.featuredImage}
+            src={memo.featuredImage!}
             alt={memo.title}
             fill
             sizes="100vw"
@@ -24,31 +26,31 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
           />
         </div>
       ) : (
-        <div className="relative w-full h-[280px] sm:h-[400px] lg:h-[560px] bg-[var(--bg-secondary)] overflow-hidden flex items-end">
+        <div className="relative w-full min-h-[320px] sm:min-h-[400px] lg:min-h-[520px] bg-[var(--bg-secondary)] overflow-hidden flex items-end">
           {/* Subtle grid pattern */}
           <div
             className="absolute inset-0 opacity-[0.03]"
             style={{
               backgroundImage:
                 "linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px)",
-              backgroundSize: "60px 60px",
+              backgroundSize: "40px 40px",
             }}
           />
           {/* Radial glow */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.06]"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px] rounded-full opacity-[0.06]"
             style={{ background: "radial-gradient(circle, var(--accent), transparent 70%)" }}
           />
           {/* Content */}
-          <div className="relative z-10 w-full px-8 sm:px-12 lg:px-20 pb-10 sm:pb-14 lg:pb-16">
+          <div className="relative z-10 w-full px-5 sm:px-12 lg:px-20 pb-8 sm:pb-14 lg:pb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="flex items-center gap-4 mb-5 sm:mb-6"
+              className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6"
             >
-              <div className="w-8 sm:w-10 h-px bg-[var(--accent)]" />
-              <span className="font-mono text-[9px] sm:text-[10px] tracking-[3px] text-[var(--accent)]">
+              <div className="w-6 sm:w-10 h-px bg-[var(--accent)]" />
+              <span className="font-mono text-[9px] sm:text-[10px] tracking-[2px] sm:tracking-[3px] text-[var(--accent)]">
                 {memo.tag}
               </span>
             </motion.div>
@@ -56,7 +58,7 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="font-playfair text-[32px] sm:text-[44px] lg:text-[60px] font-normal tracking-[-1px] sm:tracking-[-2px] lg:tracking-[-3px] leading-[1.05] text-[var(--text-primary)] max-w-[900px]"
+              className="font-playfair text-[26px] sm:text-[40px] lg:text-[56px] font-normal tracking-[-0.5px] sm:tracking-[-1.5px] lg:tracking-[-3px] leading-[1.1] sm:leading-[1.05] text-[var(--text-primary)] max-w-[900px]"
             >
               {memo.title}
             </motion.h1>
@@ -64,17 +66,17 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
-              className="mt-5 sm:mt-6 flex items-center gap-4"
+              className="mt-4 sm:mt-6 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-1"
             >
-              <span className="font-mono text-[10px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
+              <span className="font-mono text-[9px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
                 H. PERVAIZ
               </span>
-              <span className="text-[var(--text-subtle)]">/</span>
-              <span className="font-mono text-[10px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
+              <span className="text-[var(--text-subtle)] hidden sm:inline">/</span>
+              <span className="font-mono text-[9px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
                 {memo.fullDate}
               </span>
-              <span className="text-[var(--text-subtle)]">/</span>
-              <span className="font-mono text-[10px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
+              <span className="text-[var(--text-subtle)] hidden sm:inline">/</span>
+              <span className="font-mono text-[9px] sm:text-[11px] tracking-[1.5px] text-[var(--text-dim)]">
                 {memo.time}
               </span>
             </motion.div>
@@ -148,18 +150,20 @@ export default function MemoDetail({ memo }: { memo: Memo }) {
           {/* Spacer */}
           <div className="h-12 sm:h-[60px]" />
 
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="font-playfair text-[28px] sm:text-[36px] lg:text-[48px] font-normal tracking-[-1px] sm:tracking-[-1.5px] lg:tracking-[-2px] leading-[1.1] text-[var(--text-primary)]"
-          >
-            {memo.title}
-          </motion.h1>
-
-          {/* Spacer */}
-          <div className="h-12 sm:h-[60px]" />
+          {/* Title - only show in body when hero has a featured image */}
+          {hasImage && (
+            <>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="font-playfair text-[28px] sm:text-[36px] lg:text-[48px] font-normal tracking-[-1px] sm:tracking-[-1.5px] lg:tracking-[-2px] leading-[1.1] text-[var(--text-primary)]"
+              >
+                {memo.title}
+              </motion.h1>
+              <div className="h-12 sm:h-[60px]" />
+            </>
+          )}
 
           {/* Article Content */}
           {memo.sections.map((section, i) => {
