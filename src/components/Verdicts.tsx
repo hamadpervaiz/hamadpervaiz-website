@@ -250,7 +250,7 @@ export default function Verdicts() {
                   — competing alongside 200 startups from 30+ countries.
                 </p>
                 <span className="font-mono text-[10px] tracking-[2px] text-[var(--text-darker)]">
-                  San Francisco · 2024
+                  San Francisco · 2025
                 </span>
               </div>
             </motion.div>
